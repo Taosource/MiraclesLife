@@ -4,13 +4,15 @@ import time
 import sys
 
 from pygame import VIDEORESIZE
-from pygame.constants import FULLSCREEN, SCALED
+from pygame.constants import FULLSCREEN, SCALED, MOUSEBUTTONDOWN, MOUSEBUTTONUP
 
 # 自己的
 from setting import Settings
 
 
 class Button:
+    """按钮控制"""
+
     def __init__(self):
         self.settings = Settings()
 
@@ -20,12 +22,13 @@ class Button:
     def mouse(self):
         pygame.init()
         # x_mouse, y_mouse = pyautogui.position()
-        for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                x_mouse_clock, y_mouse_clock = pygame.mouse.get_pos()
-                if 775 <= x_mouse_clock <= 965 and 190 <= y_mouse_clock <= 205:
-                    return True
-
+        # for event in pygame.event.get():
+            # if event.type == pygame.MOUSEBUTTONDOWN:
+        x_mouse_clock, y_mouse_clock = pygame.mouse.get_pos()
+        if 775 <= x_mouse_clock <= 1025 and 190 <= y_mouse_clock <= 215:
+            return True
+        else:
+            return False
 
 class Initiate:
     """创建启动页面"""
@@ -71,7 +74,7 @@ class Initiate:
                     run = False
                     # sys.exit()  # 终止程序，确保退出程序
 
-                if event.type == VIDEORESIZE:
+                if event.type == VIDEORESIZE:  # 判断用户是否点击最大化按钮
                     SCREEN_SIZE = event.size  # 获取窗口大小
 
                     guis = pygame.display.set_mode(SCREEN_SIZE, flags)  # 重设窗口（在窗口最大化后）
@@ -80,6 +83,10 @@ class Initiate:
                     guis.blit(bg_img, (0, 0))
 
                     pygame.display.update()  # 刷新
-
-                if Button.mouse(None):
-                    print("成功")
+                elif event.type == MOUSEBUTTONDOWN and MOUSEBUTTONUP:  # 判断用户是否点击鼠标
+                    buttons = Button()
+                    values_1 = buttons.mouse()
+                    infoObject = pygame.display.Info()
+                    print(values_1, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
+                    if values_1:
+                        print("成功")
