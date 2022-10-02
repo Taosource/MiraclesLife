@@ -25,10 +25,10 @@ class Button:
         # for event in pygame.event.get():
             # if event.type == pygame.MOUSEBUTTONDOWN:
         x_mouse_clock, y_mouse_clock = pygame.mouse.get_pos()
-        if 775 <= x_mouse_clock <= 1025 and 190 <= y_mouse_clock <= 215:
+        if 775 <= x_mouse_clock <= 1205 and 190 <= y_mouse_clock <= 215:
             return True
         else:
-            return False
+            return False, x_mouse_clock, y_mouse_clock
 
 class Initiate:
     """创建启动页面"""
