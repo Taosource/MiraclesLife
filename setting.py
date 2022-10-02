@@ -5,3 +5,4 @@ class Settings:
         self.game_name = "星玄"
         self.ship = (1600, 900)
         self.image = 'Material\\image\\icon.bmp'
+        self.word_path = "Material\\word_body\\simkai.ttf"
