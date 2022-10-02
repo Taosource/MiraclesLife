@@ -16,10 +16,7 @@ class Button:
     def __init__(self):
         self.settings = Settings()
 
-        self.x_mouse_clock = 0
-        self.y_mouse_clock = 0
-
-    def mouse_button(self):
+    def mouse_button_one(self):
         pygame.init()
         # x_mouse, y_mouse = pyautogui.position()
         # for event in pygame.event.get():
@@ -29,6 +26,22 @@ class Button:
             return True
         else:
             return False  # , x_mouse_clock, y_mouse_clock
+
+    def mouse_button_two(self):
+        pygame.init()
+        x_mouse_clock, y_mouse_clock = pygame.mouse.get_pos()
+        if 105 <= x_mouse_clock <= 455 and 480 <= y_mouse_clock <= 580:
+            return True
+        else:
+            return False
+
+    def mouse_button_three(self):
+        pygame.init()
+        x_mouse_clock, y_mouse_clock = pygame.mouse.get_pos()
+        if 1480 <= x_mouse_clock <= 1830 and 480 <= y_mouse_clock <= 580:
+            return True
+        else:
+            return False
 
 
 class Initiate:
@@ -43,6 +56,7 @@ class Initiate:
         self.image = self.settings.image
         self.word_paths = self.settings.word_path
         self.fps = self.settings.fps
+        self.bt_much = self.settings.bt_much
         # 从设置模块获取相关设置参数
 
         # 结束函数
@@ -64,9 +78,11 @@ class Initiate:
             # 循环获取事件，监听事件状态
             # backgroud_img = pygame.image.load(self.images)
             # guis.blit(backgroud_img, (0, 0))
+
             for event in pygame.event.get():
                 # ab = Button(1)
                 # print(ab.mouse())
+
                 if event.type == pygame.QUIT:  # 判断用户是否点了"X"关闭按钮,并执行if代码段
                     pygame.quit()  # 卸载所有模块
                     run = False
@@ -80,25 +96,28 @@ class Initiate:
                     guis.blit(bg_img, (0, 0))
 
                     pygame.display.update()  # 刷新
-                elif event.type == MOUSEBUTTONDOWN and MOUSEBUTTONUP:  # 判断用户是否点击鼠标
+                if event.type == MOUSEBUTTONDOWN and MOUSEBUTTONUP:  # 判断用户是否点击鼠标
                     buttons = Button()
-                    values_1 = buttons.mouse_button()
+                    values_one = buttons.mouse_button_one()
+                    values_two = buttons.mouse_button_two()
+                    values_three = buttons.mouse_button_three()
                     infoObject = pygame.display.Info()  # 获取屏幕大小
-                    # print(values_1, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
-                    if values_1:
-                        print("成功")
-                        # print(self.word_paths)
 
+                    print(values_one, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
+
+                    if values_one:
+                        # print("成功")
+                        # print(self.word_paths)
                         # 关键是这里！！！
                         # surface = guis.convert_alpha()  # 关键是这里！！！
                         # 关键是这里！！！
                         # surface.fill((255, 255, 255, 255))  # alpha=0,全透明
                         # 左方框
                         rect_one = pygame.Rect(105, 480, 350, 100)
-                        pygame.draw.rect(guis, (255, 255, 255, 255), rect_one)
+                        pygame.draw.rect(guis, (255, 255, 255, 100), rect_one)
                         # 右方框
                         rect_two = pygame.Rect(1480, 480, 350, 100)
-                        pygame.draw.rect(guis, (255, 255, 255, 255), rect_two)
+                        pygame.draw.rect(guis, (255, 255, 255, 100), rect_two)
                         # 此时你绘制的矩形将可以使用第四个数值的透明度值！！！！
                         # 绘制矩形（中第一个表示这个矩形画的容器在哪个地方，第二个参数表示采用什么颜色，第三个参数(前两个表示x轴的距离，y轴的距离，宽度，长度)，最后一个参数表示线的粗细(0表示一个实心的)）
 
@@ -112,10 +131,34 @@ class Initiate:
                         #  文字显示----2
                         word_left_one = pygame.font.Font(self.word_paths, 80)
                         # 通过pygame.font.Font（）类从设置中获取字体路径，并渲染字体大小。进行实例化
-                        text_one = word_left_one.render("种子编辑", True, (102, 217, 255))  # 传入要显示的文本，是否为平滑字体， 字体颜色，
-                        text_one_show = text_one.get_rect()  # 获取文本显示区域的大小
-                        text_one_show.center = (1650, 530)
-                        guis.blit(text_one, text_one_show)
+                        text_two = word_left_one.render("种子编辑", True, (102, 217, 255))  # 传入要显示的文本，是否为平滑字体， 字体颜色，
+                        text_two_show = text_one.get_rect()  # 获取文本显示区域的大小
+                        text_two_show.center = (1650, 530)
+                        guis.blit(text_two, text_two_show)
 
                         fcclock.tick(self.fps)  # 刷新率设置
                         pygame.display.flip()  # 更新屏幕内容
+
+
+                    elif values_two:
+                        print("成功")
+                        # 左方选择框
+                        zero = 0
+                        while zero <= self.bt_much:
+                            # 左方选择框
+                            rect_one = pygame.Rect(0, 0, 500, 1025)
+                            pygame.draw.rect(guis, (255, 153, 153, 100), rect_one)
+                            zero += 1
+
+                        fcclock.tick(self.fps)  # 刷新率设置
+                        pygame.display.flip()  # 更新屏幕内容
+
+                    elif values_three:
+                        print("成功22")
+
+
+
+
+
+
+

@@ -7,3 +7,4 @@ class Settings:
         self.image = 'Material\\image\\icon.bmp'
         self.word_path = "Material\\word_body\\simkai.ttf"
         self.fps = 50
+        self.bt_much = 0
