@@ -88,5 +88,5 @@ class Initiate:
                     values_1 = buttons.mouse_first_button()
                     infoObject = pygame.display.Info()
                     # print(values_1, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
-                    if values_1 == True:
+                    if values_1:
                         print("成功")
