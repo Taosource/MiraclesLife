@@ -19,13 +19,13 @@ class Button:
         self.x_mouse_clock = 0
         self.y_mouse_clock = 0
 
-    def mouse(self):
+    def mouse_first_button(self):
         pygame.init()
         # x_mouse, y_mouse = pyautogui.position()
         # for event in pygame.event.get():
             # if event.type == pygame.MOUSEBUTTONDOWN:
         x_mouse_clock, y_mouse_clock = pygame.mouse.get_pos()
-        if 775 <= x_mouse_clock <= 1205 and 190 <= y_mouse_clock <= 215:
+        if 775 <= x_mouse_clock <= 1205 and 165 <= y_mouse_clock <= 190:
             return True
         else:
             return False, x_mouse_clock, y_mouse_clock
@@ -85,8 +85,8 @@ class Initiate:
                     pygame.display.update()  # 刷新
                 elif event.type == MOUSEBUTTONDOWN and MOUSEBUTTONUP:  # 判断用户是否点击鼠标
                     buttons = Button()
-                    values_1 = buttons.mouse()
+                    values_1 = buttons.mouse_first_button()
                     infoObject = pygame.display.Info()
-                    print(values_1, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
-                    if values_1:
+                    # print(values_1, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
+                    if values_1 == True:
                         print("成功")
