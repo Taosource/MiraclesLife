@@ -7,14 +7,14 @@ from pygame import VIDEORESIZE
 from pygame.constants import FULLSCREEN, SCALED, MOUSEBUTTONDOWN, MOUSEBUTTONUP
 
 # 自己的
-from setting import Settings
+from setting import Value_base
 
 
 class Button:
     """按钮控制"""
 
     def __init__(self):
-        self.settings = Settings()
+        self.settings = Value_base()
 
     def mouse_button_one(self):
         pygame.init()
@@ -48,7 +48,7 @@ class Word_show:
     """"创建文字显示模块"""
 
     def __init__(self, guis, serial_number, space_information=None):
-        self.settings = Settings()
+        self.settings = Value_base()
         self.word_paths = self.settings.word_path
         self.word_colors = self.settings.word_color
         # 从设置中导入相关参数
@@ -96,7 +96,7 @@ class Word_show:
             #  文字显示----4
             word_left_one = pygame.font.Font(self.word_paths, 60)
             # 通过pygame.font.Font（）类从设置中获取字体路径，并渲染字体大小。进行实例化
-            text_two = word_left_one.render("该功能还未开放", True, self.word_colors)  # 传入要显示的文本，是否为平滑字体， 字体颜色，
+            text_two = word_left_one.render("请前往模板编辑", True, self.word_colors)  # 传入要显示的文本，是否为平滑字体， 字体颜色，
             text_two_show = text_two.get_rect()  # 获取文本显示区域的大小
             text_two_show.center = (1700, 540)
             self.guis.blit(text_two, text_two_show)
@@ -119,7 +119,7 @@ class List_bt:
 
     def __init__(self, guis, information):
         #  从设置模块获取参数
-        self.settings = Settings()
+        self.settings = Value_base()
         self.bt_much = self.settings.bt_much
         self.bt_info = self.settings.bt_information
 
@@ -143,7 +143,7 @@ class Initiate:
     def __init__(self):
         self.initiate_time = time.time()
         # 获取时间
-        self.settings = Settings()
+        self.settings = Value_base()
         self.ship = self.settings.ship
         self.game_name = self.settings.game_name
         self.image = self.settings.image
@@ -252,7 +252,9 @@ class Initiate:
                                     lists.list_bt()
                                     draw_number += 1
 
-                                    information = ["seed_name", (65, top_size+25)]
+                                    seed_name = "seed_name"
+                                    seed_name_numder = len(seed_name)
+                                    information = [seed_name, (240, top_size+25)]
                                     word = Word_show(guis, 5, information)
                                     word.run_game()
 
