@@ -47,14 +47,14 @@ class Button:
 class Word_show:
     """"创建文字显示模块"""
 
-    def __init__(self, guis, serial_number):
+    def __init__(self, guis, serial_number, space_information=None):
         self.settings = Settings()
         self.word_paths = self.settings.word_path
         self.word_colors = self.settings.word_color
         # 从设置中导入相关参数
 
         self.guis = guis
-
+        self.space_information = space_information
         self.serial_number = serial_number
 
     def run_game(self):
@@ -101,6 +101,18 @@ class Word_show:
             text_two_show.center = (1700, 540)
             self.guis.blit(text_two, text_two_show)
 
+        # 种子选择界面文字
+        elif self.serial_number == 5:
+            # 解析相关信息
+            seed_name = self.space_information[0]
+            seed_place = self.space_information[1]
+            # 文字显示----5
+            word_left_one = pygame.font.Font(self.word_paths, 20)
+            text_two = word_left_one.render(seed_name, True, self.word_colors)  # 传入要显示的文本，是否为平滑字体， 字体颜色，
+            text_two_show = text_two.get_rect()  # 获取文本显示区域的大小
+            text_two_show.center = seed_place
+            self.guis.blit(text_two, text_two_show)
+
 
 class List_bt:
     """关于种子选择列表"""
@@ -143,7 +155,7 @@ class Initiate:
     def initiate_gui(self):
         """创建启动页面函数"""
 
-        global shuns
+        global shuns, shun
         pygame.init()  # 初始化pygame
         flags = pygame.RESIZABLE  # 设置窗口最大化
         guis = pygame.display.set_mode(self.ship, flags)  # 设置窗口大小
@@ -234,10 +246,15 @@ class Initiate:
                                 draw_number = 0
 
                                 while draw_number <= self.bt_much:
-                                    information = [40, 120 * draw_number + 20, 400, 100]
+                                    top_size = 70 * draw_number + 20
+                                    information = [40, top_size, 400, 50]
                                     lists = List_bt(guis, information)
                                     lists.list_bt()
                                     draw_number += 1
+
+                                    information = ["seed_name", (65, top_size+25)]
+                                    word = Word_show(guis, 5, information)
+                                    word.run_game()
 
                             else:
                                 #  文字显示----3

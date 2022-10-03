@@ -10,5 +10,6 @@ class Settings:
         self.fps = 50  # 刷新率
 
         #  从相关管理模块抓取信息
+        #  种子管理模块
         self.bt_much = 20  # 注：个数从零开始若为4则实际有5个
         self.bt_information = []
