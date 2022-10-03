@@ -213,6 +213,7 @@ class Initiate:
                         # surface = guis.convert_alpha()  # 关键是这里！！！
                         # 关键是这里！！！
                         # surface.fill((255, 255, 255, 255))  # alpha=0,全透明
+                        # 考虑图片
                         # 左方框
                         rect_one = pygame.Rect(105, 580, 350, 5)
                         pygame.draw.rect(guis, (94, 253, 253, 1), rect_one)
