@@ -43,6 +43,63 @@ class Button:
         else:
             return False
 
+class Word_show:
+    """"创建文字显示模块"""
+
+    def __init__(self, guis, serial_number):
+        self.settings = Settings()
+        self.word_paths = self.settings.word_path
+        self.word_colors = self.settings.word_color
+        # 从设置中导入相关参数
+
+        self.guis = guis
+
+        self.serial_number = serial_number
+
+    def run_game(self):
+        if self.serial_number == 1:
+            #  文字显示----1
+            word_left_one = pygame.font.Font(self.word_paths, 80)
+            # 通过pygame.font.Font（）类从设置中获取字体路径，并渲染字体大小。进行实例化
+            text_one = word_left_one.render("种子选择", True, self.word_colors)  # 传入要显示的文本，是否为平滑字体， 字体颜色，
+            text_one_show = text_one.get_rect()  # 获取文本显示区域的大小
+            text_one_show.center = (280, 530)  # 文本显示位置
+            self.guis.blit(text_one, text_one_show)
+
+        elif self.serial_number == 2:
+            #  文字显示----2
+            word_left_two = pygame.font.Font(self.word_paths, 80)
+            # 通过pygame.font.Font（）类从设置中获取字体路径，并渲染字体大小。进行实例化
+            text_two = word_left_two.render("种子编辑", True, self.word_colors)  # 传入要显示的文本，是否为平滑字体， 字体颜色，
+            text_two_show = text_two.get_rect()  # 获取文本显示区域的大小
+            text_two_show.center = (1650, 530)
+            self.guis.blit(text_two, text_two_show)
+
+        elif self.serial_number == 3:
+            #  文字显示----3
+            word_left_one = pygame.font.Font(self.word_paths, 50)
+            # 通过pygame.font.Font（）类从设置中获取字体路径，并渲染字体大小。进行实例化
+            text_one = word_left_one.render("你还未编辑任何种子！", True,
+                                            self.word_colors)  # 传入要显示的文本，是否为平滑字体， 字体颜色，
+            text_one_show = text_one.get_rect()  # 获取文本显示区域的大小
+            text_one_show.center = (260, 530)
+            self.guis.blit(text_one, text_one_show)
+
+            word_left_one = pygame.font.Font(self.word_paths, 30)
+            text_one = word_left_one.render("请前往模板进行编辑。", True, self.word_colors)
+            text_one_show = text_one.get_rect()
+            text_one_show.center = (240, 600)
+            self.guis.blit(text_one, text_one_show)
+
+        elif self.serial_number == 4:
+            #  文字显示----4
+            word_left_one = pygame.font.Font(self.word_paths, 60)
+            # 通过pygame.font.Font（）类从设置中获取字体路径，并渲染字体大小。进行实例化
+            text_two = word_left_one.render("该功能还未开放", True, self.word_colors)  # 传入要显示的文本，是否为平滑字体， 字体颜色，
+            text_two_show = text_two.get_rect()  # 获取文本显示区域的大小
+            text_two_show.center = (1700, 540)
+            self.guis.blit(text_two, text_two_show)
+
 
 class Initiate:
     """创建启动页面"""
@@ -58,8 +115,6 @@ class Initiate:
         self.fps = self.settings.fps
         self.bt_much = self.settings.bt_much
         # 从设置模块获取相关设置参数
-
-        # 结束函数
 
     def initiate_gui(self):
         """创建启动页面函数"""
@@ -124,27 +179,20 @@ class Initiate:
                         # surface.fill((255, 255, 255, 255))  # alpha=0,全透明
                         # 左方框
                         rect_one = pygame.Rect(105, 480, 350, 100)
-                        pygame.draw.rect(guis, (255, 255, 255, 100), rect_one)
+                        pygame.draw.rect(guis, (179, 179, 255, 100), rect_one)
                         # 右方框
                         rect_two = pygame.Rect(1480, 480, 350, 100)
-                        pygame.draw.rect(guis, (255, 255, 255, 100), rect_two)
+                        pygame.draw.rect(guis, (179, 179, 255, 100), rect_two)
                         # 此时你绘制的矩形将可以使用第四个数值的透明度值！！！！
                         # 绘制矩形（中第一个表示这个矩形画的容器在哪个地方，第二个参数表示采用什么颜色，第三个参数(前两个表示x轴的距离，y轴的距离，宽度，长度)，最后一个参数表示线的粗细(0表示一个实心的)）
 
                         #  文字显示----1
-                        word_left_one = pygame.font.Font(self.word_paths, 80)
-                        # 通过pygame.font.Font（）类从设置中获取字体路径，并渲染字体大小。进行实例化
-                        text_one = word_left_one.render("种子选择", True, (102, 217, 255))  # 传入要显示的文本，是否为平滑字体， 字体颜色，
-                        text_one_show = text_one.get_rect()  # 获取文本显示区域的大小
-                        text_one_show.center = (280, 530)
-                        guis.blit(text_one, text_one_show)
+                        word_left_one = Word_show(guis, 1)
+                        word_left_one.run_game()
+
                         #  文字显示----2
-                        word_left_one = pygame.font.Font(self.word_paths, 80)
-                        # 通过pygame.font.Font（）类从设置中获取字体路径，并渲染字体大小。进行实例化
-                        text_two = word_left_one.render("种子编辑", True, (102, 217, 255))  # 传入要显示的文本，是否为平滑字体， 字体颜色，
-                        text_two_show = text_one.get_rect()  # 获取文本显示区域的大小
-                        text_two_show.center = (1650, 530)
-                        guis.blit(text_two, text_two_show)
+                        word_left_one = Word_show(guis, 2)
+                        word_left_one.run_game()
 
                         fcclock.tick(self.fps)  # 刷新率设置
                         pygame.display.flip()  # 更新屏幕内容
@@ -158,7 +206,14 @@ class Initiate:
                         while zero <= self.bt_much:
                             # 左方选择框
                             rect_one = pygame.Rect(0, 0, 500, 1025)
-                            pygame.draw.rect(guis, (255, 153, 153, 100), rect_one)
+                            pygame.draw.rect(guis, (229, 255, 249, 100), rect_one)
+                            if self.bt_much != 0:
+                                pass
+                            else:
+                                #  文字显示----3
+                                word = Word_show(guis, 3)
+                                word.run_game()
+
                             zero += 1
 
                         fcclock.tick(self.fps)  # 刷新率设置
@@ -167,13 +222,18 @@ class Initiate:
                     elif values_three:
                         print("成功22")
                         shuns += 1
-                        # 左方选择框
-                        zero = 0
-                        while zero <= self.bt_much:
-                            # 左方选择框
+                        # 右方选择框
+                        zero = True
+                        while zero:
+                            # 右方选择框
                             rect_one = pygame.Rect(1480, 0, 500, 1025)
-                            pygame.draw.rect(guis, (255, 153, 153, 100), rect_one)
-                            zero += 1
+                            pygame.draw.rect(guis, (229, 255, 249, 100), rect_one)
+
+                            #  文字显示----2
+                            word = Word_show(guis, 4)
+                            word.run_game()
+
+                            zero = False
 
                         fcclock.tick(self.fps)  # 刷新率设置
                         pygame.display.flip()  # 更新屏幕内容
