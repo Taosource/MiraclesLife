@@ -64,6 +64,7 @@ class Initiate:
     def initiate_gui(self):
         """创建启动页面函数"""
 
+        global shuns
         pygame.init()  # 初始化pygame
         flags = pygame.RESIZABLE  # 设置窗口最大化
         guis = pygame.display.set_mode(self.ship, flags)  # 设置窗口大小
@@ -96,6 +97,8 @@ class Initiate:
                     guis.blit(bg_img, (0, 0))
 
                     pygame.display.update()  # 刷新
+                    shuns = 0
+
                 if event.type == MOUSEBUTTONDOWN and MOUSEBUTTONUP:  # 判断用户是否点击鼠标
                     buttons = Button()
                     values_one = buttons.mouse_button_one()
@@ -104,8 +107,15 @@ class Initiate:
                     infoObject = pygame.display.Info()  # 获取屏幕大小
 
                     print(values_one, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
+                    # 检测是否为顺序执行（防止前面内容覆盖后面的）
 
-                    if values_one:
+                    if shuns <= 1:
+                        shun = True
+
+                    if shuns >= 1:
+                        shun = False
+
+                    if values_one and shun:
                         # print("成功")
                         # print(self.word_paths)
                         # 关键是这里！！！
@@ -142,6 +152,7 @@ class Initiate:
 
                     elif values_two:
                         print("成功")
+                        shuns += 1
                         # 左方选择框
                         zero = 0
                         while zero <= self.bt_much:
@@ -155,10 +166,14 @@ class Initiate:
 
                     elif values_three:
                         print("成功22")
+                        shuns += 1
+                        # 左方选择框
+                        zero = 0
+                        while zero <= self.bt_much:
+                            # 左方选择框
+                            rect_one = pygame.Rect(1480, 0, 500, 1025)
+                            pygame.draw.rect(guis, (255, 153, 153, 100), rect_one)
+                            zero += 1
 
-
-
-
-
-
-
+                        fcclock.tick(self.fps)  # 刷新率设置
+                        pygame.display.flip()  # 更新屏幕内容
