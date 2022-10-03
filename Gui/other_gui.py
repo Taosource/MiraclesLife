@@ -43,6 +43,7 @@ class Button:
         else:
             return False
 
+
 class Word_show:
     """"创建文字显示模块"""
 
@@ -99,6 +100,29 @@ class Word_show:
             text_two_show = text_two.get_rect()  # 获取文本显示区域的大小
             text_two_show.center = (1700, 540)
             self.guis.blit(text_two, text_two_show)
+
+
+class List_bt:
+    """关于种子选择列表"""
+
+    def __init__(self, guis, information):
+        #  从设置模块获取参数
+        self.settings = Settings()
+        self.bt_much = self.settings.bt_much
+        self.bt_info = self.settings.bt_information
+
+        #  从其他模块接受的参数
+        self.guis = guis
+
+        self.information = information
+
+    def list_bt(self):
+        left_size = self.information[0]
+        top_size = self.information[1]
+        width_size = self.information[2]
+        hight_size = self.information[3]
+        rect_one = pygame.Rect(left_size, top_size, width_size, hight_size)
+        pygame.draw.rect(self.guis, (179, 179, 255, 100), rect_one)
 
 
 class Initiate:
@@ -197,7 +221,6 @@ class Initiate:
                         fcclock.tick(self.fps)  # 刷新率设置
                         pygame.display.flip()  # 更新屏幕内容
 
-
                     elif values_two:
                         print("成功")
                         shuns += 1
@@ -208,11 +231,20 @@ class Initiate:
                             rect_one = pygame.Rect(0, 0, 500, 1025)
                             pygame.draw.rect(guis, (229, 255, 249, 100), rect_one)
                             if self.bt_much != 0:
-                                pass
+                                draw_number = 0
+
+                                while draw_number <= self.bt_much:
+                                    information = [40, 120 * draw_number + 20, 400, 100]
+                                    lists = List_bt(guis, information)
+                                    lists.list_bt()
+                                    draw_number += 1
+
                             else:
                                 #  文字显示----3
                                 word = Word_show(guis, 3)
                                 word.run_game()
+                            fcclock.tick(self.fps)  # 刷新率设置
+                            pygame.display.flip()  # 更新屏幕内容
 
                             zero += 1
 
