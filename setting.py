@@ -16,7 +16,7 @@ class Settings:
         self.ship = (1600, 900)
         self.image = 'Material\\image\\icon1.bmp'  # 背景图片路径（icon和icon1）
         self.word_path = "Material\\word_body\\simkai.ttf"  # 字体文件路径
-        self.word_color = (179, 179, 255)  # 字体颜色
+        self.word_color = (150, 233, 255)  # 字体颜色
         self.fps = 50  # 刷新率
 
         #  从相关管理模块抓取信息
