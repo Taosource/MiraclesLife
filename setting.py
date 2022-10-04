@@ -18,11 +18,11 @@ class Settings:
         self.word_path = "Material\\word_body\\simkai.ttf"  # 字体文件路径
         self.word_color = (150, 233, 255)  # 字体颜色
         self.fps = 50  # 刷新率
-        self.date_root_path = "Date"  # 数据库根目录
+        self.date_root_path = "Data"  # 数据库根目录
 
         #  从相关管理模块抓取信息
         #  种子管理模块
-        self.bt_much = 0  # 注：个数从零开始若为4则实际有5个
+        self.bt_much = 20  # 注：个数从零开始若为4则实际有5个
         self.bt_information = []
 
 
