@@ -45,7 +45,7 @@ class Contral_main:
         root_path = information[0]
         root_path = root_path[0]  # 得到数据库根目录所在位置
         first_floor_info = information[1]  # 获取目录下所有文件夹
-
+    # 数据库目录完整效验
         for name in first_floor:
             # print(name)
             paths = root_path[0:18] + ''
