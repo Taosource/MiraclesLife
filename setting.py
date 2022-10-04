@@ -11,12 +11,14 @@ class Settings:
         self.os_informatin = os.name
 
         #  初始化游戏运行所需参数
+        # 注：所有文件路径均采用相对路径
         self.game_name = "星玄"
         self.ship = (1600, 900)
-        self.image = 'Material\\image\\icon1.bmp'  # 背景图片路径（icon和icon1）
+        self.image = "Material\\image\\icon1.bmp"  # 背景图片路径（icon和icon1）
         self.word_path = "Material\\word_body\\simkai.ttf"  # 字体文件路径
         self.word_color = (150, 233, 255)  # 字体颜色
         self.fps = 50  # 刷新率
+        self.date_root_path = "Date"  # 数据库根目录
 
         #  从相关管理模块抓取信息
         #  种子管理模块
@@ -38,3 +40,4 @@ class Value_base:
         self.fps = self.values_all_raw.fps  # 刷新率
         self.bt_much = self.values_all_raw.bt_much  # 种子数量
         self.bt_information = self.values_all_raw.bt_information  # 种子信息
+        self.date_root_path = self.values_all_raw.date_root_path  # 根目录数据库

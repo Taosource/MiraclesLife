@@ -1,4 +1,3 @@
-import pygame  # 导入pygame包
 import time
 
 import pygame  # 导入pygame包
@@ -9,12 +8,13 @@ from pygame.constants import MOUSEBUTTONDOWN, MOUSEBUTTONUP
 from setting import Value_base
 
 shun_list = []
-shun_lists = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+shun_lists = [0, 1, 2, 3, 4, 5]
 
 
 def shun_xu(number):
     shun_list.append(number)
-    if len(shun_list) == 0 or len(shun_list) >= 10:
+    if len(shun_list) == 0 or len(shun_list) >= 6:
+        del shun_list[-1]
         return False
     elif number == shun_lists[len(shun_list)]:
         return True, shun_list
@@ -184,9 +184,6 @@ class Initiate:
             # guis.blit(backgroud_img, (0, 0))
 
             for event in pygame.event.get():
-                # ab = Button(1)
-                # print(ab.mouse())
-
                 if event.type == pygame.QUIT:  # 判断用户是否点了"X"关闭按钮,并执行if代码段
                     pygame.quit()  # 卸载所有模块
                     run = False
