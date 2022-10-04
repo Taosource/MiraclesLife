@@ -217,12 +217,13 @@ class Initiate:
                         # surface = guis.convert_alpha()  # 关键是这里！！！
                         # 关键是这里！！！
                         # surface.fill((255, 255, 255, 255))  # alpha=0,全透明
+                        # 考虑图片
                         # 左方框
-                        rect_one = pygame.Rect(105, 480, 350, 100)
-                        pygame.draw.rect(guis, (179, 179, 255, 100), rect_one)
+                        rect_one = pygame.Rect(105, 580, 350, 5)
+                        pygame.draw.rect(guis, (94, 253, 253, 1), rect_one)
                         # 右方框
-                        rect_two = pygame.Rect(1480, 480, 350, 100)
-                        pygame.draw.rect(guis, (179, 179, 255, 100), rect_two)
+                        rect_two = pygame.Rect(1480, 580, 350, 5)
+                        pygame.draw.rect(guis, (94, 253, 253, 1), rect_two)
                         # 此时你绘制的矩形将可以使用第四个数值的透明度值！！！！
                         # 绘制矩形（中第一个表示这个矩形画的容器在哪个地方，第二个参数表示采用什么颜色，第三个参数(前两个表示x轴的距离，y轴的距离，宽度，长度)，最后一个参数表示线的粗细(0表示一个实心的)）
 
