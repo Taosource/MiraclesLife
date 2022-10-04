@@ -1,13 +1,26 @@
-import pyautogui
 import pygame  # 导入pygame包
 import time
-import sys
 
+import pygame  # 导入pygame包
 from pygame import VIDEORESIZE
-from pygame.constants import FULLSCREEN, SCALED, MOUSEBUTTONDOWN, MOUSEBUTTONUP
+from pygame.constants import MOUSEBUTTONDOWN, MOUSEBUTTONUP
 
 # 自己的
 from setting import Value_base
+
+shun_list = []
+shun_lists = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+
+def shun_xu(number):
+    shun_list.append(number)
+    if len(shun_list) == 0 or len(shun_list) >= 10:
+        return False
+    elif number == shun_lists[len(shun_list)]:
+        return True, shun_list
+    else:
+        del shun_list[-1]
+        return False
 
 
 class Button:
@@ -155,7 +168,6 @@ class Initiate:
     def initiate_gui(self):
         """创建启动页面函数"""
 
-        global shuns, shun
         pygame.init()  # 初始化pygame
         flags = pygame.RESIZABLE  # 设置窗口最大化
         guis = pygame.display.set_mode(self.ship, flags)  # 设置窗口大小
@@ -180,15 +192,13 @@ class Initiate:
                     run = False
                     # sys.exit()  # 终止程序，确保退出程序
 
-                if event.type == VIDEORESIZE:  # 判断用户是否点击最大化按钮
+                if event.type == VIDEORESIZE and shun_xu(1):  # 判断用户是否点击最大化按钮
                     SCREEN_SIZE = event.size  # 获取窗口大小
-
                     guis = pygame.display.set_mode(SCREEN_SIZE, flags)  # 重设窗口（在窗口最大化后）
                     bg_img = pygame.image.load(self.image).convert()  # 重设背景
                     guis.blit(bg_img, (0, 0))
 
                     pygame.display.update()  # 刷新
-                    shuns = 0
 
                 if event.type == MOUSEBUTTONDOWN and MOUSEBUTTONUP:  # 判断用户是否点击鼠标
                     buttons = Button()
@@ -200,13 +210,7 @@ class Initiate:
                     print(values_one, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
                     # 检测是否为顺序执行（防止前面内容覆盖后面的）
 
-                    if shuns <= 1:
-                        shun = True
-
-                    if shuns >= 1:
-                        shun = False
-
-                    if values_one and shun:
+                    if values_one and shun_xu(2):
                         # print("成功")
                         # print(self.word_paths)
                         # 关键是这里！！！
@@ -233,12 +237,12 @@ class Initiate:
                         fcclock.tick(self.fps)  # 刷新率设置
                         pygame.display.flip()  # 更新屏幕内容
 
-                    elif values_two:
+                    elif values_two and shun_xu(3):
                         print("成功")
-                        shuns += 1
                         # 左方选择框
                         zero = 0
-                        while zero <= self.bt_much:
+
+                        while zero <= self.bt_much and shun_xu(4):
                             # 左方选择框
                             rect_one = pygame.Rect(0, 0, 500, 1025)
                             pygame.draw.rect(guis, (229, 255, 249, 100), rect_one)
@@ -254,7 +258,7 @@ class Initiate:
 
                                     seed_name = "seed_name"
                                     seed_name_numder = len(seed_name)
-                                    information = [seed_name, (240, top_size+25)]
+                                    information = [seed_name, (240, top_size + 25)]
                                     word = Word_show(guis, 5, information)
                                     word.run_game()
 
@@ -270,9 +274,8 @@ class Initiate:
                         fcclock.tick(self.fps)  # 刷新率设置
                         pygame.display.flip()  # 更新屏幕内容
 
-                    elif values_three:
+                    elif values_three and shun_xu(5):
                         print("成功22")
-                        shuns += 1
                         # 右方选择框
                         zero = True
                         while zero:
