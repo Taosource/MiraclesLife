@@ -1,6 +1,5 @@
 from Gui.other_gui import Initiate  # 导入Gui包相关内容
 from setting import Settings
-import pyautogui
 
 
 class Open_Gui:
@@ -18,3 +17,5 @@ class Open_Gui:
 if __name__ == '__main__':
     game1 = Open_Gui()
     game1.game_gui8()
+
+# (True, [0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 9, 2, 9, 2, 1])

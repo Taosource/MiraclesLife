@@ -1,5 +1,4 @@
 #  UTF-8
-import time
 import os
 
 
@@ -21,7 +20,7 @@ class Settings:
 
         #  从相关管理模块抓取信息
         #  种子管理模块
-        self.bt_much = 20  # 注：个数从零开始若为4则实际有5个
+        self.bt_much = 0  # 注：个数从零开始若为4则实际有5个
         self.bt_information = []
 
 
