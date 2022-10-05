@@ -23,10 +23,11 @@ class Contral_main:
         dirpaths = []
         file_folder = []
         file = []
+
         root_path = self.root_path
         root_path = root_path + "\\Data_base"
-        # root_path = os.getcwd()
-        path = os.path.join(root_path, self.date_root_path)
+        path = os.path.join(root_path, self.date_root_path)  # 获取绝对路径
+
         for dirpath, dirnames, filenames in os.walk(path):
             dirpaths.append(dirpath)
             if len(dirnames) != 0:
@@ -41,10 +42,10 @@ class Contral_main:
         information = Contral_main.data_informations_get(self)  # 调用data_informations_get函数获取所有目录及文件信息
         file_information = []  # 该列表包含所有文件信息
         # 0：文件目录（由一个字典储存） 1：文件大小信息及文件归属（ascription）
-        first_floor = {'Date_run': 'Data_base\\Data\\Data_run',
-                       'Date_archive': 'Data_base\\Data\\Data_archive',
-                       'Date_model': 'Data_base\\Data\\Data_model',
-                       'Date_seed': 'Data_base\\Data\\Data_seed',
+        first_floor = {'Data_run': 'Data_base\\Data\\Data_run',
+                       'Data_archive': 'Data_base\\Data\\Data_archive',
+                       'Data_model': 'Data_base\\Data\\Data_model',
+                       'Data_seed': 'Data_base\\Data\\Data_seed',
 
                        }  # 第一层目录
         file_information.append(first_floor)
@@ -52,10 +53,10 @@ class Contral_main:
         # 以下部分为解析所获取的信息
         print(information)
         root_path = information[0]
+        root_path_len = len(str(root_path[0]))
         print(root_path)
         root_path = root_path[0]  # 得到数据库根目录所在位置
         first_floor_info = information[1]  # 获取目录下所有文件夹
-        file_information.append(first_floor)
         # 数据库目录完整效验
         intact = []  # 0为缺失，1为为完整
         for name in first_floor:
@@ -83,7 +84,7 @@ class Contral_main:
         for two in file_echange_two:  # 逐个遍历总数据库Data下面的所有文件夹
             for three in file_echange_three:  # 逐个遍历总数据库Data下面的所有文件夹下的所有非文件夹文件
                 threes = three[0:-13]  # 注意所有数据文件名称为长为8，格式为csv （此处为获取每个文件前面的路径部分以便确定文件所属文件夹）
-                twos = two[33:-1] + two[-1]  # 得到总数据库Data下每一个文件夹的名称
+                twos = two[root_path_len + 1:-1] + two[-1]  # 得到总数据库Data下每一个文件夹的名称
                 if two == threes:  # 通过确定文件前面的路径相同来判断该文件命名否合程序要求
                     #  以下的if语句为判断文件归属并将文件名加入到对应列表中
                     if twos == 'Data_archive':
@@ -103,11 +104,50 @@ class Contral_main:
                         size = os.stat(three)
                         data_seed.append(size.st_size)
         info = [data_archive, data_model, data_run, data_seed]
-        file_information.append(info)
+        file_information.append(info)  # 将文件名称存入改列表（位于第二个元素），总共四个列表代表四个文件夹依次对应
 
         return file_information  # , information, root_path, first_floor_info,
 
-    def data_informations_output(self):
+    def info_file_into(self):
+        """文件详细信息获取"""
+
+        def seed_info():
+            """种子信息处理"""
+            seed_info = {}  # 储存种子信息（key为种子名（为字符串）value为一个列表）
+            # 列表中第一个元素为种子编号，第二个为种子绝对路径，第三个为大小
+            seed_number = 0
+            root_path = self.root_path  # 得到根目录
+            root_path = root_path + "\\Data_base"  # 得到数据库根目录
+            path = os.path.join(root_path, self.date_root_path)  # 将数据库根目录与数据目录组合得到绝对路径
+            info_path = Contral_main.data_informations_make(self)  # 获取文件路径名称等信息
+            info_paths = info_path[0]
+            info_file = info_path[1]
+            info_paths = list(info_paths)
+            for info_path in info_paths:
+                if info_path == "Data_seed":
+                    make_path = path + "\\Data_seed"
+                    for dirpath, dirnames, filenames in os.walk(make_path):
+                        seed_number = len(filenames)
+                        for i in filenames:
+                            r_path = dirpath + "\\" + i
+                            with open(r_path, "r", encoding="UTF-8", newline='') as f:
+                                read = csv.reader(f)
+                                next(read)
+                                infos = read
+                                for info in read:
+                                    info = str(info)
+                                    seed_info[info[0]] = info[1]
+
+                        dirpath = dirpath
+                        dirnames = dirnames
+                        filenames = filenames
+                        print(dirpath)
+                        print(dirnames)
+                        print(filenames)
+
+        seed_info()
+
+    def data_informations_write(self):
         file_information = Contral_main.data_informations_make(self)  # 调用data_informations_make函数获取处理好的目录及文件信息
         with open(self.data_dump_path, "a+", encoding="UTF-8", newline='') as info:
             file_write = csv.writer(info)

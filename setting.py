@@ -1,6 +1,7 @@
 #  UTF-8
 import os
 
+
 class Settings:
     """设置模块"""
 
@@ -26,10 +27,22 @@ class Settings:
 
 
 class Value_exchange:
-    """获取管理模块的值"""
+    """获取管理模块的值并处理"""
 
     def __init__(self):
-        pass
+        self.data_dump = os.getcwd() + "Data_base\\Data_dump.csv"
+
+    def value_get(self):
+        """从数据转存文件获取值"""
+        data = []
+        with open(self.data_dump, "r", encoding="UTF-8") as f:
+            for line in f:
+                data.append(line)  # 将文件逐行读取，将每一行作为一个元素添加到列表中
+        return data
+
+    def values_make(self):
+        """处理得到的值"""
+        data = Value_exchange.value_get(self)
 
 
 class Value_base:
@@ -47,4 +60,3 @@ class Value_base:
         self.bt_much = self.values_all_raw.bt_much  # 种子数量
         self.bt_information = self.values_all_raw.bt_information  # 种子信息
         self.date_root_path = self.values_all_raw.date_root_path  # 根目录数据库
-
