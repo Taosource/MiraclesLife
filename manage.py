@@ -15,7 +15,6 @@ class Run_game:
         #  数据管理
         print(self.root_path)
         A = Contral_main(self.root_path)
-        A.data_informations_write()
         A.info_file_into()
 
         # 游戏初始界面
