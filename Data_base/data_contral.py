@@ -15,6 +15,7 @@ class Contral_main:
         self.settings = Value_base()
         self.date_root_path = self.settings.date_root_path
 
+
         # 从相关模块获取参数
         self.root_path = root_path
 
@@ -31,6 +32,7 @@ class Contral_main:
         root_path = root_path + "\\Data_base"
         path = os.path.join(root_path, self.date_root_path)  # 获取绝对路径
 
+
         for dirpath, dirnames, filenames in os.walk(path):
             dirpaths.append(dirpath)
             if len(dirnames) != 0:
@@ -42,6 +44,7 @@ class Contral_main:
         return dirpaths, file_folder, file
 
     def data_informations_make(self):
+
         file_information = []
         information = Contral_main.data_informations_get(self)  # 调用data_informations_get函数获取所有目录及文件信息
         # 0：文件目录（由一个字典储存） 1：文件大小信息及文件归属（ascription）
@@ -172,6 +175,7 @@ class Data_writer:
 
         # 特殊参数（1：对应字典写入模式（默认为字符串写入可以为空））
         self.write_code = write_code
+
 
         # 从其他模块导入必要值
         self.root_path = os.getcwd()

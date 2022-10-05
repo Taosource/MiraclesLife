@@ -23,5 +23,7 @@ class Run_game:
 
 
 if __name__ == '__main__':
+
     game = Run_game()
     game.run_game()
+
