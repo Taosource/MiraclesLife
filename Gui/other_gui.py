@@ -203,7 +203,6 @@ class Initiate:
                     values_two = buttons.mouse_button_two()
                     values_three = buttons.mouse_button_three()
                     infoObject = pygame.display.Info()  # 获取屏幕大小
-                    print(infoObject)
 
                     print(values_one, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
                     # 检测是否为顺序执行（防止前面内容覆盖后面的）

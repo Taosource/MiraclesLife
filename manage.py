@@ -1,20 +1,27 @@
+import os
+
+from Data_base.data_contral import Contral_main
 from Gui.other_gui import Initiate  # 导入Gui包相关内容
-from setting import Settings
 
 
-class Open_Gui:
+class Run_game:
     """创建启动类"""
 
     def __init__(self):
-        self.settings = Settings()  # 导入设置的相关参数
+        self.root_path = os.getcwd()
 
-    def game_gui8(self):
+    def run_game(self):
         """创建游戏启动界面函数"""
+        #  数据管理
+        print(self.root_path)
+        A = Contral_main(self.root_path)
+        A.data_informations_output()
+
+        # 游戏初始界面
         initiates = Initiate()
         initiates.initiate_gui()
 
 
 if __name__ == '__main__':
-    game1 = Open_Gui()
-    game1.game_gui8()
-
+    game = Run_game()
+    game.run_game()

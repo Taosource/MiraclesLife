@@ -1,7 +1,6 @@
 #  UTF-8
 import os
 
-
 class Settings:
     """设置模块"""
 
@@ -26,6 +25,13 @@ class Settings:
         self.bt_information = []
 
 
+class Value_exchange:
+    """获取管理模块的值"""
+
+    def __init__(self):
+        pass
+
+
 class Value_base:
     """向各个模块输出值"""
 
@@ -41,3 +47,4 @@ class Value_base:
         self.bt_much = self.values_all_raw.bt_much  # 种子数量
         self.bt_information = self.values_all_raw.bt_information  # 种子信息
         self.date_root_path = self.values_all_raw.date_root_path  # 根目录数据库
+
