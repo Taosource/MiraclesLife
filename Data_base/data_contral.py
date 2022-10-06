@@ -3,8 +3,6 @@
 import csv
 import os
 
-from setting import Value_base
-
 
 class Contral_main:
     """中心控制模块"""
@@ -12,9 +10,8 @@ class Contral_main:
     def __init__(self, root_path):
         #  导入设置，从设置中获取相关参数
         self.data_dump_path = root_path + "\\Data_base\\Data_dump.csv"
-        self.settings = Value_base()
-        self.date_root_path = self.settings.date_root_path
-
+        # self.settings = Value_base()
+        self.date_root_path = "Data"  # self.settings.date_root_path
 
         # 从相关模块获取参数
         self.root_path = root_path
@@ -57,10 +54,10 @@ class Contral_main:
         file_information.append(first_floor)
 
         # 以下部分为解析所获取的信息
-        print(information)
+        # print(information)
         root_path = information[0]
-        root_path_len = len(str(root_path[0]))
-        print(root_path)
+        root_path_len = len(str(root_path[0]))  # 获取根目录长度
+        # print(root_path)
         root_path = root_path[0]  # 得到数据库根目录所在位置
         first_floor_info = information[1]  # 获取目录下所有文件夹
         # 数据库目录完整效验
@@ -69,13 +66,13 @@ class Contral_main:
             # print(name)
             paths = root_path[0:18]
             names = str(paths + first_floor[name])
-            print(names)
+            # print(names)
             if names in first_floor_info:
                 intact.append(1)
-                print("目录完整")
+                # print("目录完整")
             else:
                 intact.append(0)
-                print("目录缺失")
+                # print("目录缺失")
 
         # file_echange_one = information[0]  # 包含总数据库Data
         file_echange_two = information[1]  # 总数据库Data下面的所有文件夹
@@ -175,7 +172,6 @@ class Data_writer:
 
         # 特殊参数（1：对应字典写入模式（默认为字符串写入可以为空））
         self.write_code = write_code
-
 
         # 从其他模块导入必要值
         self.root_path = os.getcwd()

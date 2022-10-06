@@ -13,7 +13,7 @@ class Run_game:
     def run_game(self):
         """创建游戏启动界面函数"""
         #  数据管理
-        print(self.root_path)
+        # print(self.root_path)
         A = Contral_main(self.root_path)
         A.info_file_into()
 
@@ -23,7 +23,9 @@ class Run_game:
 
 
 if __name__ == '__main__':
-
     game = Run_game()
     game.run_game()
-
+    path = os.getcwd()
+    path = path + "\\Data_base\\Data_dump.csv"
+    with open(path, "w", encoding="UTF-8") as f:
+        f.truncate()

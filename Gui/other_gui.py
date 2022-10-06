@@ -68,7 +68,7 @@ class Word_show:
 
         self.guis = guis
         self.space_information = space_information
-        self.serial_number = serial_number
+        self.serial_number = serial_number  # 通过数字确定显示什么部分
 
     def run_game(self):
         if self.serial_number == 1:
@@ -134,7 +134,7 @@ class List_bt:
         #  从设置模块获取参数
         self.settings = Value_base()
         self.bt_much = self.settings.bt_much
-        self.bt_info = self.settings.bt_information
+        # self.bt_info = self.settings.bt_information
 
         #  从其他模块接受的参数
         self.guis = guis
@@ -163,6 +163,7 @@ class Initiate:
         self.word_paths = self.settings.word_path
         self.fps = self.settings.fps
         self.bt_much = self.settings.bt_much
+        self.seed_info = self.settings.seed_info
         # 从设置模块获取相关设置参数
 
     def initiate_gui(self):
@@ -202,10 +203,10 @@ class Initiate:
                     values_one = buttons.mouse_button_one()
                     values_two = buttons.mouse_button_two()
                     values_three = buttons.mouse_button_three()
-                    infoObject = pygame.display.Info()  # 获取屏幕大小
-                    print(infoObject)
+                    # infoObject = pygame.display.Info()  # 获取屏幕大小
+                    # print(infoObject)
 
-                    print(values_one, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
+                    # print(values_one, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
                     # 检测是否为顺序执行（防止前面内容覆盖后面的）
 
                     if values_one and shun_xu(2):
@@ -253,28 +254,34 @@ class Initiate:
                                     information = [40, top_size, 400, 50]
                                     lists = List_bt(guis, information)
                                     lists.list_bt()
-                                    draw_number += 1
+                                    # print("draw_number的值是：")
+                                    # print(draw_number)
+                                    # print(self.seed_info)
+                                    seed_info_list = self.seed_info[:]
 
-                                    seed_name = "seed_name"
-                                    seed_name_numder = len(seed_name)
+                                    one_seed = seed_info_list[draw_number]
+                                    seed_name = one_seed[1]
+                                    # seed_name = "seed_name"
+                                    # seed_name_numder = len(seed_name)
                                     information = [seed_name, (240, top_size + 25)]
                                     word = Word_show(guis, 5, information)
                                     word.run_game()
+                                    draw_number += 1
 
                             else:
                                 #  文字显示----3
                                 word = Word_show(guis, 3)
                                 word.run_game()
                             fcclock.tick(self.fps)  # 刷新率设置
-                            pygame.display.flip()  # 更新屏幕内容
 
                             zero += 1
+                            pygame.display.flip()  # 更新屏幕内容
 
                         fcclock.tick(self.fps)  # 刷新率设置
                         pygame.display.flip()  # 更新屏幕内容
 
                     elif values_three and shun_xu(5):
-                        print("成功22")
+                        # print("成功22")
                         # 右方选择框
                         zero = True
                         while zero:
