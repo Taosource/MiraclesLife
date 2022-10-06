@@ -2,6 +2,7 @@ import os
 
 from Data_base.data_contral import Contral_main
 from Gui.other_gui import Initiate  # 导入Gui包相关内容
+from Gui.game_gui import Gui
 
 
 class Run_game:
@@ -20,7 +21,9 @@ class Run_game:
         # 游戏初始界面
         initiates = Initiate()
         initiates.initiate_gui()
-
+        # 游戏主体界面
+        game_gui = Gui()
+        game_gui.game_gui()
 
 if __name__ == '__main__':
 
