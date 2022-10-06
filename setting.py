@@ -14,7 +14,7 @@ class Settings:
         # 注：所有文件路径均采用相对路径
         self.game_name = "星玄"
         self.ship = (1600, 900)
-        self.game_gui = "Material\\image\\gui1.bmp"  # 游戏gui
+        self.game_gui = "..\\Material\\image\\gui1.bmp"  # 游戏gui
         self.image = "Material\\image\\icon1.bmp"  # 背景图片路径（icon和icon1）
         self.word_path = "Material\\word_body\\simkai.ttf"  # 字体文件路径
         self.word_color = (150, 233, 255)  # 字体颜色
@@ -78,6 +78,7 @@ class Value_base:
         self.game_name = self.values_all_raw.game_name  # 游戏名
         self.ship = self.values_all_raw.ship  # 窗口大小
         self.image = self.values_all_raw.image  # 背景图片路径
+        self.game_gui = self.values_all_raw.game_gui  # 游戏UI路径
         self.word_path = self.values_all_raw.word_path  # 字体文件路径
         self.word_color = self.values_all_raw.word_color  # 字体颜色
         self.fps = self.values_all_raw.fps  # 刷新率
