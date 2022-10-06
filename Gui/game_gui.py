@@ -1,7 +1,8 @@
-
 import pygame
-from setting import Value_base
 from pygame.locals import *
+
+from setting import Value_base
+
 
 class Gui:
     def __init__(self):
@@ -25,17 +26,4 @@ class Gui:
                     run = False
                 screen.blit(gui, (0, 0))
                 pygame.display.update()
-
-game_gui = Gui()
-game_gui.game_gui()
-
-
-
-
-
-
-
-
-
-
 
