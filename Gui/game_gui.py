@@ -15,7 +15,7 @@ class Gui:
         """游戏界面gui"""
         pygame.init()
         pygame.display.set_caption(self.game_name)
-        screen = pygame.display.set_mode((1920, 1027), FULLSCREEN, 32)
+        screen = pygame.display.set_mode((1920, 1027), RESIZABLE)
         gui = pygame.image.load(self.gui).convert()
 
         run = True
@@ -24,6 +24,6 @@ class Gui:
                 if event.type == pygame.QUIT:  # 判断用户是否点了"X"关闭按钮,并执行if代码段
                     pygame.quit()
                     run = False
-                screen.blit(gui, (0, 0))
-                pygame.display.update()
-
+                else:
+                    screen.blit(gui, (0, 0))
+                    pygame.display.update()
