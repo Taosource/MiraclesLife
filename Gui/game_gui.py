@@ -1,8 +1,11 @@
 
 import pygame
+
 from setting import Value_base
 
+
 class Gui:
+
     def __init__(self):
         self.settings = Value_base()
         self.game_name = self.settings.game_name
@@ -22,9 +25,6 @@ class Gui:
                 gui_bmp = self.gui
                 guis.blit(gui_bmp, (0, 0))
                 pygame.display.update()
-                if event.type == pygame.QUIT:  # 判断用户是否点了"X"关闭按钮,并执行if代码段
-                    pygame.quit()
-                    run = False
 
 
 
