@@ -12,7 +12,7 @@ class Settings:
 
         #  初始化游戏运行所需参数
         # 注：所有文件路径均采用相对路径
-        self.game_name = "星玄"
+        self.game_name = "涌现:控制台"
         self.ship = (1600, 900)
         self.image = "Material\\image\\icon1.bmp"  # 背景图片路径（icon和icon1）
         self.word_path = "Material\\word_body\\simkai.ttf"  # 字体文件路径
