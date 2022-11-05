@@ -10,7 +10,6 @@ from setting import Value_base
 shun_list = []
 shun_lists = [0, 1, 2, 3, 4, 5]
 
-
 def shun_xu(number):
     shun_list.append(number)
     if len(shun_list) == 0 or len(shun_list) >= 6:
