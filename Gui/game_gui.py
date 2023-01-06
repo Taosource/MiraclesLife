@@ -4,6 +4,11 @@ from pygame.locals import *
 from setting import Value_base
 
 
+class EventMake:
+    def __init__(self):
+        pass
+
+
 class Gui:
     def __init__(self):
         self.settings = Value_base()
