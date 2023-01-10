@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 from pygame.locals import *
 
@@ -5,8 +7,16 @@ from setting import Value_base
 
 
 class EventMake:
-    def __init__(self):
-        pass
+    def __init__(self, screen, gui):
+        self.screen = screen
+        self.gui = gui
+
+    def quits(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:  # 判断用户是否点击关闭按钮
+                pygame.quit()
+                run = False
+                sys.exit()
 
 
 class Gui:
@@ -25,10 +35,7 @@ class Gui:
 
         run = True
         while run:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:  # 判断用户是否点了"X"关闭按钮,并执行if代码段
-                    pygame.quit()
-                    run = False
-                else:
-                    screen.blit(gui, (0, 0))
-                    pygame.display.update()
+            eventmake = EventMake(screen=screen, gui=gui)
+            eventmake.quits()
+            screen.blit(gui, (0, 0))
+            pygame.display.update()
