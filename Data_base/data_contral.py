@@ -3,6 +3,8 @@
 import csv
 import os
 
+from setting import Value_base
+
 
 class Contral_main:
     """中心控制模块"""
@@ -10,8 +12,8 @@ class Contral_main:
     def __init__(self, root_path):
         #  导入设置，从设置中获取相关参数
         self.data_dump_path = root_path + "\\Data_base\\Data_dump.csv"
-        # self.settings = Value_base()
-        self.date_root_path = "Data"  # self.settings.date_root_path
+        self.settings = Value_base()
+        self.date_root_path = self.settings.date_root_path
 
         # 从相关模块获取参数
         self.root_path = root_path
@@ -29,7 +31,6 @@ class Contral_main:
         root_path = root_path + "\\Data_base"
         path = os.path.join(root_path, self.date_root_path)  # 获取绝对路径
 
-
         for dirpath, dirnames, filenames in os.walk(path):
             dirpaths.append(dirpath)
             if len(dirnames) != 0:
@@ -41,7 +42,6 @@ class Contral_main:
         return dirpaths, file_folder, file
 
     def data_informations_make(self):
-
         file_information = []
         information = Contral_main.data_informations_get(self)  # 调用data_informations_get函数获取所有目录及文件信息
         # 0：文件目录（由一个字典储存） 1：文件大小信息及文件归属（ascription）
@@ -54,10 +54,10 @@ class Contral_main:
         file_information.append(first_floor)
 
         # 以下部分为解析所获取的信息
-        # print(information)
+        print(information)
         root_path = information[0]
-        root_path_len = len(str(root_path[0]))  # 获取根目录长度
-        # print(root_path)
+        root_path_len = len(str(root_path[0]))
+        print(root_path)
         root_path = root_path[0]  # 得到数据库根目录所在位置
         first_floor_info = information[1]  # 获取目录下所有文件夹
         # 数据库目录完整效验
@@ -66,13 +66,13 @@ class Contral_main:
             # print(name)
             paths = root_path[0:18]
             names = str(paths + first_floor[name])
-            # print(names)
+            print(names)
             if names in first_floor_info:
                 intact.append(1)
-                # print("目录完整")
+                print("目录完整")
             else:
                 intact.append(0)
-                # print("目录缺失")
+                print("目录缺失")
 
         # file_echange_one = information[0]  # 包含总数据库Data
         file_echange_two = information[1]  # 总数据库Data下面的所有文件夹
