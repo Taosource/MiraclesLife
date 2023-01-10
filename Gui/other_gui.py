@@ -1,6 +1,7 @@
 # 导入外部第三方库
-import time
 import sys
+import time
+
 import pygame  # 导入pygame包
 from pygame import VIDEORESIZE
 from pygame.constants import MOUSEBUTTONDOWN, MOUSEBUTTONUP
@@ -159,19 +160,21 @@ class Eventmakes:
         # 接受初始参数
     
     def quits(self):
-        for event in pygame.event.get()
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            run = False
-            sys.exit()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                run = False
+                sys.exit()
                 
 
 class Initiate:
     """创建启动页面"""
 
     def __init__(self):
-        self.initiate_time = time.time()
         # 获取时间
+        self.initiate_time = time.time()
+
+        # 从设置模块获取相关设置参数
         self.settings = Value_base()
         self.ship = self.settings.ship
         self.game_name = self.settings.game_name
@@ -180,7 +183,6 @@ class Initiate:
         self.fps = self.settings.fps
         self.bt_much = self.settings.bt_much
         self.seed_info = self.settings.seed_info
-        # 从设置模块获取相关设置参数
 
     def initiate_gui(self):
         """创建启动页面函数"""
