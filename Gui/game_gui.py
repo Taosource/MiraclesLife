@@ -1,6 +1,10 @@
+# 导入第三方包
+import sys
+
 import pygame
 from pygame.locals import *
 
+# 导入自己的包
 from setting import Value_base
 
 

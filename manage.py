@@ -1,5 +1,10 @@
+# python3.8.10
+# UTF-8
+
+# 导入第三方包
 import os
 
+# 导入自己的包
 from Data_base.data_contral import Contral_main
 from Gui.game_gui import Gui
 from Gui.other_gui import Initiate  # 导入Gui包相关内容
