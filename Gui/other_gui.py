@@ -1,10 +1,11 @@
+# 导入外部第三方库
 import time
-
+import sys
 import pygame  # 导入pygame包
 from pygame import VIDEORESIZE
 from pygame.constants import MOUSEBUTTONDOWN, MOUSEBUTTONUP
 
-# 自己的
+# 导入自己的包
 from setting import Value_base
 
 shun_list = []
@@ -148,6 +149,22 @@ class List_bt:
         rect_one = pygame.Rect(left_size, top_size, width_size, hight_size)
         pygame.draw.rect(self.guis, (179, 179, 255, 100), rect_one)
 
+
+class Eventmakes:
+    """关于鼠标键盘事件判断"""
+    def __init__(self):
+        # 从设置导入参数
+        self.settings = Value_base()
+
+        # 接受初始参数
+    
+    def quits(self):
+        for event in pygame.event.get()
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            run = False
+            sys.exit()
+                
 
 class Initiate:
     """创建启动页面"""
