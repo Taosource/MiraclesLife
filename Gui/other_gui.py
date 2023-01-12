@@ -1,5 +1,4 @@
 # 导入外部第三方库
-import sys
 import time
 
 # 导入第三方包
@@ -153,21 +152,38 @@ class List_bt:
         pygame.draw.rect(self.guis, (179, 179, 255, 100), rect_one)
 
 
+class OrderRestrictions:
+    """限制各个事件触发的顺序"""
+    '''解决办法：
+        将每个UI跳转与事件按照层级分配一个序列号，
+        该序列号每两位表示一个层级，每次事件触发时
+        检测序列号，将序列号切片进行层级分析，判断
+        是否正确。
+        '''
+
+    def __init__(self, serialnumber):  # 接受参数序列号
+        # 从设置导入参数
+        self.settings = Value_base()
+
+        # 接受初始化参数
+
+
 class Eventmakes:
     """关于鼠标键盘事件判断"""
+
     def __init__(self):
         # 从设置导入参数
         self.settings = Value_base()
 
         # 接受初始参数
-    
-    def quits(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                run = False
-                sys.exit()
-                
+
+    def quits(self):  # 退出函数
+        for event in pygame.event.get():  # 遍历取出事件
+            if event.type == pygame.QUIT:  # 判断事件类型，如果为点击×则执行
+                pygame.quit()  # 退出pygame，卸载所有模块
+                run = False  # 停止循环
+                # sys.exit()  # 系统退出，终止程序
+
 
 class Initiate:
     """创建启动页面"""
