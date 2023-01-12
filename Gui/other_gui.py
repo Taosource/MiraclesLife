@@ -1,10 +1,12 @@
+# 导入外部第三方库
 import time
 
-import pygame  # 导入pygame包
+# 导入第三方包
+import pygame
 from pygame import VIDEORESIZE
 from pygame.constants import MOUSEBUTTONDOWN, MOUSEBUTTONUP
 
-# 自己的
+# 导入自己的包
 from setting import Value_base
 
 shun_list = []
@@ -68,7 +70,7 @@ class Word_show:
 
         self.guis = guis
         self.space_information = space_information
-        self.serial_number = serial_number
+        self.serial_number = serial_number  # 通过数字确定显示什么部分
 
     def run_game(self):
         if self.serial_number == 1:
@@ -134,7 +136,7 @@ class List_bt:
         #  从设置模块获取参数
         self.settings = Value_base()
         self.bt_much = self.settings.bt_much
-        self.bt_info = self.settings.bt_information
+        # self.bt_info = self.settings.bt_information
 
         #  从其他模块接受的参数
         self.guis = guis
@@ -150,12 +152,47 @@ class List_bt:
         pygame.draw.rect(self.guis, (179, 179, 255, 100), rect_one)
 
 
+class OrderRestrictions:
+    """限制各个事件触发的顺序"""
+    '''解决办法：
+        将每个UI跳转与事件按照层级分配一个序列号，
+        该序列号每两位表示一个层级，每次事件触发时
+        检测序列号，将序列号切片进行层级分析，判断
+        是否正确。
+        '''
+
+    def __init__(self, serialnumber):  # 接受参数序列号
+        # 从设置导入参数
+        self.settings = Value_base()
+
+        # 接受初始化参数
+
+
+class Eventmakes:
+    """关于鼠标键盘事件判断"""
+
+    def __init__(self):
+        # 从设置导入参数
+        self.settings = Value_base()
+
+        # 接受初始参数
+
+    def quits(self):  # 退出函数
+        for event in pygame.event.get():  # 遍历取出事件
+            if event.type == pygame.QUIT:  # 判断事件类型，如果为点击×则执行
+                pygame.quit()  # 退出pygame，卸载所有模块
+                run = False  # 停止循环
+                # sys.exit()  # 系统退出，终止程序
+
+
 class Initiate:
     """创建启动页面"""
 
     def __init__(self):
-        self.initiate_time = time.time()
         # 获取时间
+        self.initiate_time = time.time()
+
+        # 从设置模块获取相关设置参数
         self.settings = Value_base()
         self.ship = self.settings.ship
         self.game_name = self.settings.game_name
@@ -163,7 +200,7 @@ class Initiate:
         self.word_paths = self.settings.word_path
         self.fps = self.settings.fps
         self.bt_much = self.settings.bt_much
-        # 从设置模块获取相关设置参数
+        self.seed_info = self.settings.seed_info
 
     def initiate_gui(self):
         """创建启动页面函数"""
@@ -202,10 +239,10 @@ class Initiate:
                     values_one = buttons.mouse_button_one()
                     values_two = buttons.mouse_button_two()
                     values_three = buttons.mouse_button_three()
-                    infoObject = pygame.display.Info()  # 获取屏幕大小
-                    print(infoObject)
+                    # infoObject = pygame.display.Info()  # 获取屏幕大小
+                    # print(infoObject)
 
-                    print(values_one, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
+                    # print(values_one, infoObject.current_w, infoObject.current_h)  # 第二个为输出屏幕长，第三个高
                     # 检测是否为顺序执行（防止前面内容覆盖后面的）
 
                     if values_one and shun_xu(2):
@@ -253,28 +290,34 @@ class Initiate:
                                     information = [40, top_size, 400, 50]
                                     lists = List_bt(guis, information)
                                     lists.list_bt()
-                                    draw_number += 1
+                                    # print("draw_number的值是：")
+                                    # print(draw_number)
+                                    # print(self.seed_info)
+                                    seed_info_list = self.seed_info[:]
 
-                                    seed_name = "seed_name"
-                                    seed_name_numder = len(seed_name)
+                                    one_seed = seed_info_list[draw_number]
+                                    seed_name = one_seed[1]
+                                    # seed_name = "seed_name"
+                                    # seed_name_numder = len(seed_name)
                                     information = [seed_name, (240, top_size + 25)]
                                     word = Word_show(guis, 5, information)
                                     word.run_game()
+                                    draw_number += 1
 
                             else:
                                 #  文字显示----3
                                 word = Word_show(guis, 3)
                                 word.run_game()
                             fcclock.tick(self.fps)  # 刷新率设置
-                            pygame.display.flip()  # 更新屏幕内容
 
                             zero += 1
+                            pygame.display.flip()  # 更新屏幕内容
 
                         fcclock.tick(self.fps)  # 刷新率设置
                         pygame.display.flip()  # 更新屏幕内容
 
                     elif values_three and shun_xu(5):
-                        print("成功22")
+                        # print("成功22")
                         # 右方选择框
                         zero = True
                         while zero:
