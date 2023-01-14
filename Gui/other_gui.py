@@ -164,8 +164,20 @@ class OrderRestrictions:
     def __init__(self, serialnumber):  # 接受参数序列号
         # 从设置导入参数
         self.settings = Value_base()
+        self.root_path = self.settings.root_path
 
         # 接受初始化参数
+        self.serialnumber = serialnumber
+
+    def sequence_number_resolution(self):
+        """序列号解析函数"""
+        path = self.root_path + "OperationalData\\Serialnumber.csv"
+        with open(path, "", encoding="UTF-8") as f:
+            pass
+
+    def judgment(self):
+        """判断并返回结果"""
+        pass
 
 
 class Eventmakes:

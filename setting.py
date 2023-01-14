@@ -7,8 +7,10 @@ class Settings:
 
     def __init__(self):
         """初始化各项设置"""
-        #  相关信息获取
-        self.os_informatin = os.name
+        #  从系统获取相关信息
+        self.os_informatin = os.name  # 获取系统类型
+        self.root_path = os.getcwd()  # 获取游戏运行时的根目录（注：该目录与settings运行时所处的目录有关
+        # 所以settings文件的位置至关重要该根目录参数将会在多个位置使用 ）
 
         #  初始化游戏运行所需参数
         # 注：所有文件路径均采用相对路径
@@ -45,6 +47,7 @@ class Value_exchange:
                 data.append(line)  # 将文件逐行读取，将每一行作为一个元素添加到列表中
         pi_pei = data[5]
         # line = "this hdr-biz model args= server"
+
         patt = r'csv'
         pattern = re.compile(patt)
         result = pattern.findall(pi_pei)
@@ -85,10 +88,11 @@ class Value_base:
         # self.bt_much = self.values_all_raw.bt_much  # 种子数量
         # self.bt_information = self.values_all_raw.bt_information  # 种子信息
         self.date_root_path = self.values_all_raw.date_root_path  # 根目录数据库
+        self.root_path = self.values_all_raw.root_path  # 游戏运行根目录
 
         # 经过计算的值
         self.values_make = Value_exchange()
         self.values_make_one = self.values_make.values_make()[0]
         self.values_make_two = self.values_make.values_make()[1]
-        self.bt_much = self.values_make_one[0]
-        self.seed_info = self.values_make_two
+        self.bt_much = self.values_make_one[0]  # 种子数量
+        self.seed_info = self.values_make_two  # 种子信息
