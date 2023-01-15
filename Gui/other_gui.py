@@ -172,7 +172,7 @@ class OrderRestrictions:
     def sequence_number_resolution(self):
         """序列号解析函数"""
         path = self.root_path + "OperationalData\\Serialnumber.csv"
-        with open(path, "", encoding="UTF-8") as f:
+        with open(path, "a+", encoding="UTF-8") as f:
             pass
 
     def judgment(self):
