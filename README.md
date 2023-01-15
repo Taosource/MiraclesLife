@@ -1,3 +1,5 @@
+[![安全状态]（https://www.murphysec.com/platform3/v3/badge/1611532145030365184.svg?t=1）]（https://www.murphysec.com/accept?code=72c45ae416e6373e66997b809880b7ea&type=1&from=2&t=2）
+
 #      <center>[名称待定]
 ****
 ## 游戏主旨：
