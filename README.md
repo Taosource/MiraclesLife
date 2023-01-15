@@ -2,7 +2,7 @@
 <img src="https://www.murphysec.com/platform3/v3/badge/1611532145030365184.svg?t=1" />
 </a>
 
-![](https://img.shields.io/badge/Python-swift-orange.svg)
+![](https://img.shields.io/badge/Python-3.8.10-orange.svg)
 
 # <center>[名称待定]
 
