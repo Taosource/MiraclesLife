@@ -4,17 +4,20 @@
 
 ![](https://img.shields.io/badge/Python-3.8.10-orange.svg)
 
-# <center>[名称待定]
+# <center>游戏名称：《涌现：控制台》
 
 ****
 
-## 游戏主旨：
+## 游戏概述：
 
 ### &emsp;&emsp; 通过随机数创造文明，再通过权重值干涉随机数产生，以此模拟文明演变和发展
 
 ## 支持：
 
-### &emsp;&emsp; 由pygame（版本：2.1.2）实现图形界面
+### &emsp;&emsp; Python————————版本：3.8.10
+
+### &emsp;&emsp; pygame————————版本：2.1.2
+
 
 
 
