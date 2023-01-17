@@ -25,6 +25,34 @@ def shun_xu(number):
         return False
 
 
+class FileOperations:
+    """负责本模块内的所有文件操作"""
+
+    @staticmethod  # 定义静态方法
+    def purge_file(root_path):
+        """该函数用来执行操作1（清空文件内容）"""
+        path = root_path + "\\OperationalData\\Serialnumber.csv"  # 组合形成完整的根目录
+        with open(path, "w", encoding="UTF-8") as f:  # 以只读模式打开文件指针位于文件开头
+            f.truncate()  # 截断函数，用于清空文件内容
+
+    def __init__(self, operationcode, content=None):
+        # 从设置中导入相关初始化参数
+        self.settings = Value_base()
+        self.root_path = self.settings.root_path
+
+        # 内部的初始化参数
+        self.operationcode = operationcode  # 接受操作代码
+        self.content = content  # 接受读写内容,可以为空
+
+    def judgement(self):  # 判断该对文件执行的操作
+        """注：
+              0为清空文件内容。
+              1为在文件中追加内容，保留原内容，在末尾追加。
+              2为读取内容。"""
+        if self.operationcode == 1:
+            FileOperations.purge_file(root_path=self.root_path)  # 调用静态方法，并传入文件根目录
+
+
 class Button:
     """按钮控制"""
 
@@ -171,9 +199,12 @@ class OrderRestrictions:
 
     def sequence_number_resolution(self):
         """序列号解析函数"""
-        path = self.root_path + "OperationalData\\Serialnumber.csv"
-        with open(path, "a+", encoding="UTF-8") as f:
-            pass
+
+        def data_r_and_w():
+            """该函数用于读写文件（csv文件）"""
+            path = self.root_path + "\\OperationalData\\Serialnumber.csv"  # 组合形成完整的根目录
+            with open(path, "a+", encoding="UTF-8") as f:  # 打开一个文件用于读写，并将其赋给一个对象f
+                pass
 
     def judgment(self):
         """判断并返回结果"""
