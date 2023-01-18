@@ -1,4 +1,5 @@
 # 导入外部第三方库
+import os
 import time
 
 # 导入第三方包
@@ -29,11 +30,25 @@ class FileOperations:
     """负责本模块内的所有文件操作"""
 
     @staticmethod  # 定义静态方法
-    def purge_file(root_path):
-        """该函数用来执行操作1（清空文件内容）"""
-        path = root_path + "\\OperationalData\\Serialnumber.csv"  # 组合形成完整的根目录
-        with open(path, "w", encoding="UTF-8") as f:  # 以只读模式打开文件指针位于文件开头
+    def purge_file(root_path, operate_path):  # 接受两个参数，分别为根目录和操作目录（基于根目录）
+        """该方法用来执行操作0（清空文件内容）"""
+        path = root_path + operate_path  # 组合形成完整的根目录
+        path = os.path.join(path)
+        with open(path, "w", encoding="UTF-8") as f:  # 以只读模式打开文件指针位于文件开头,原内容将会被删除
             f.truncate()  # 截断函数，用于清空文件内容
+
+    @staticmethod  # 定义静态方法
+    def write_file(root_path, operate_path, datas):  # 接受三个参数，分别为根目录和操作目录（基于根目录）和用于写入的数据
+        """该方法用来执行操作1（写入内容）"""
+        path = root_path + operate_path
+        path = os.path.join(path)
+        with open(path, "a", encoding="UTF-8") as f:
+            f.write(datas)
+
+    @staticmethod  # 定义静态方法
+    def read_file(root_path, operate_path):  # 接受两个参数，分别为根目录和操作目录（基于根目录）
+        """该方法用来执行操作2（读取内容）"""
+        pass
 
     def __init__(self, operationcode, content=None):
         # 从设置中导入相关初始化参数
@@ -49,8 +64,15 @@ class FileOperations:
               0为清空文件内容。
               1为在文件中追加内容，保留原内容，在末尾追加。
               2为读取内容。"""
+        if self.operationcode == 0:
+            root_path = self.root_path
+            operate_path = "\\OperationalData\\Serialnumber.csv"
+            FileOperations.purge_file(root_path, operate_path)  # 调用静态方法，并传入文件根目录
         if self.operationcode == 1:
-            FileOperations.purge_file(root_path=self.root_path)  # 调用静态方法，并传入文件根目录
+            root_path = self.root_path
+            operate_path = "\\OperationalData\\Serialnumber.csv"
+            datas = self.content
+            FileOperations.write_file(root_path, operate_path, datas)
 
 
 class Button:
