@@ -71,6 +71,7 @@ class FileOperations:
               0为清空文件内容。
               1为在文件中追加内容，保留原内容，在末尾追加。
               2为读取内容。"""
+
         if self.operationcode == 0:
             root_path = self.root_path
             # operate_path = "\\OperationalData\\Serialnumber.csv"
