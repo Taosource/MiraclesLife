@@ -35,7 +35,3 @@ class Run_game:
 if __name__ == '__main__':
     game = Run_game()
     game.run_game()
-    path = os.getcwd()
-    path = path + "\\Data_base\\Data_dump.csv"
-    with open(path, "w", encoding="UTF-8") as f:  # 打开一个文件（只写模式）
-        f.truncate()  # 截断函数用于清空转储文件的内容

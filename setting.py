@@ -22,6 +22,7 @@ class Settings:
         self.word_color = (150, 233, 255)  # 字体颜色
         self.fps = 50  # 刷新率
         self.date_root_path = "Data"  # 数据库根目录
+        self.operate_path = "\\OperationalData\\Serialnumber.csv"  # 事件触发限制文件
 
         #  从相关管理模块抓取信息
         #  种子管理模块
@@ -89,6 +90,7 @@ class Value_base:
         # self.bt_information = self.values_all_raw.bt_information  # 种子信息
         self.date_root_path = self.values_all_raw.date_root_path  # 根目录数据库
         self.root_path = self.values_all_raw.root_path  # 游戏运行根目录
+        self.operate_path = self.values_all_raw.operate_path  # 事件触发限制文件目录
 
         # 经过计算的值
         self.values_make = Value_exchange()
