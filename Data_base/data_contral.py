@@ -3,37 +3,7 @@
 import csv
 import os
 
-
-# from setting import Value_base
-
-
-class Data_writer:
-    """负责数据写入"""
-
-    def __init__(self, info_write, write_code=None):
-        # 初始化需要写入的值
-        self.info_write = info_write
-
-        # 特殊参数（1：对应字典写入模式（默认为字符串写入可以为空））
-        self.write_code = write_code
-
-        # 从其他模块导入必要值
-        self.root_path = os.getcwd()
-        self.value = Contral_main(self.root_path)
-        self.data_dump_path = self.value.data_dump_path
-
-    def data_informations_write(self):
-        # file_information = Contral_main.data_informations_make(self)  # 调用data_informations_make函数获取处理好的目录及文件信息
-        if self.write_code == 1:
-            with open(self.data_dump_path, "a+", encoding="UTF-8", newline='') as info:
-                writer = csv.writer(info)
-                for key, value in self.info_write.items():
-                    print(key, value)
-                    writer.writerow([key, value])
-        else:
-            with open(self.data_dump_path, "a+", encoding="UTF-8", newline='') as infos:
-                file_write = csv.writer(infos)
-                file_write.writerows(self.info_write)
+from setting import Value_base
 
 
 class Contral_main:
@@ -42,9 +12,10 @@ class Contral_main:
     def __init__(self, root_path):
         #  导入设置，从设置中获取相关参数
         self.data_dump_path = root_path + "\\Data_base\\Data_dump.csv"
-        # self.settings = Value_base()
-        # self.date_root_path = self.settings.date_root_path
-        self.data_root_path = "Data"
+        self.settings = Value_base()
+        self.date_root_path = self.settings.date_root_path
+
+
         # 从相关模块获取参数
         self.root_path = root_path
 
@@ -59,7 +30,8 @@ class Contral_main:
 
         root_path = self.root_path
         root_path = root_path + "\\Data_base"
-        path = os.path.join(root_path, self.data_root_path)  # 获取绝对路径
+        path = os.path.join(root_path, self.date_root_path)  # 获取绝对路径
+
 
         for dirpath, dirnames, filenames in os.walk(path):
             dirpaths.append(dirpath)
@@ -72,6 +44,7 @@ class Contral_main:
         return dirpaths, file_folder, file
 
     def data_informations_make(self):
+
         file_information = []
         information = Contral_main.data_informations_get(self)  # 调用data_informations_get函数获取所有目录及文件信息
         # 0：文件目录（由一个字典储存） 1：文件大小信息及文件归属（ascription）
@@ -94,13 +67,10 @@ class Contral_main:
         intact = []  # 0为缺失，1为为完整
         for name in first_floor:
             # print(name)
-            paths = root_path[0:26]
-            # print(paths)
-            names = str(paths + '\\' + first_floor[name])
-            # names = names.replace("\\", "\\")
-            print(first_floor_info)
+            paths = root_path[0:18]
+            names = str(paths + first_floor[name])
+            print(names)
             if names in first_floor_info:
-                print(names)
                 intact.append(1)
                 print("目录完整")
             else:
@@ -159,7 +129,7 @@ class Contral_main:
         seed_number = []
         root_path = self.root_path  # 得到根目录
         root_path = root_path + "\\Data_base"  # 得到数据库根目录
-        path = os.path.join(root_path, self.data_root_path)  # 将数据库根目录与数据目录组合得到绝对路径
+        path = os.path.join(root_path, self.date_root_path)  # 将数据库根目录与数据目录组合得到绝对路径
         info_path = Contral_main.data_informations_make(self)  # 获取文件路径名称等信息
         info_paths = info_path[0]
         # info_file = info_path[1]
@@ -196,3 +166,30 @@ class Contral_main:
         info_w_three.data_informations_write()
 
 
+class Data_writer:
+    """负责数据写入"""
+
+    def __init__(self, info_write, write_code=None):
+        # 初始化需要写入的值
+        self.info_write = info_write
+
+        # 特殊参数（1：对应字典写入模式（默认为字符串写入可以为空））
+        self.write_code = write_code
+
+
+        # 从其他模块导入必要值
+        self.root_path = os.getcwd()
+        self.value = Contral_main(self.root_path)
+        self.data_dump_path = self.value.data_dump_path
+
+    def data_informations_write(self):
+        # file_information = Contral_main.data_informations_make(self)  # 调用data_informations_make函数获取处理好的目录及文件信息
+        if self.write_code == 1:
+            with open(self.data_dump_path, "a+", encoding="UTF-8", newline='') as info:
+                writer = csv.writer(info)
+                for key, value in self.info_write.items():
+                    writer.writerow([key, value])
+        else:
+            with open(self.data_dump_path, "a+", encoding="UTF-8", newline='') as infos:
+                file_write = csv.writer(infos)
+                file_write.writerows(self.info_write)

@@ -1,4 +1,5 @@
 # 导入外部第三方库
+import os
 import time
 
 # 导入第三方包
@@ -23,6 +24,67 @@ def shun_xu(number):
     else:
         del shun_list[-1]
         return False
+
+
+class FileOperations:
+    """负责本模块内的所有文件操作"""
+
+    @staticmethod  # 定义静态方法
+    def purge_file(root_path, operate_path):  # 接受两个参数，分别为根目录和操作目录（基于根目录）
+        """该方法用来执行操作0（清空文件内容）"""
+        path = root_path + operate_path  # 组合形成完整的根目录
+        path = os.path.join(path)
+        with open(path, "w", encoding="UTF-8") as f:  # 以只读模式打开文件指针位于文件开头,原内容将会被删除
+            f.truncate()  # 截断函数，用于清空文件内容
+
+    @staticmethod  # 定义静态方法
+    def write_file(root_path, operate_path, datas):  # 接受三个参数，分别为根目录和操作目录（基于根目录）和用于写入的数据
+        """该方法用来执行操作1（写入内容）"""
+        path = root_path + operate_path  # 合成根目录
+        path = os.path.join(path)   # 格式化根目录
+        with open(path, "a", encoding="UTF-8") as f:
+            f.write(datas)
+
+    @staticmethod  # 定义静态方法
+    def read_file(root_path, operate_path):  # 接受两个参数，分别为根目录和操作目录（基于根目录）
+        """该方法用来执行操作2（读取内容）"""
+        path = root_path + operate_path
+        path = os.path.join(path)
+        reaturn_data = []   # 创建空列表，接受读取出来的内容
+        with open(path, "r", encoding="UTF-8") as f:   # 以r模式打开文件
+            reaturn_data = f.readlins()  # 将整个文件读取到一个列表中，每一行为列表中的一个元素
+            
+        return reaturn_data
+
+    def __init__(self, operationcode, operatepath, content=None):
+        # 从设置中导入相关初始化参数
+        self.settings = Value_base()
+        self.root_path = self.settings.root_path
+
+        # 内部的初始化参数
+        self.operationcode = operationcode  # 接受操作代码
+        self.content = content  # 接受读写内容,可以为空
+        self.operatepath = operatepath
+
+    def judgement(self):  # 判断该对文件执行的操作
+        """注：
+              0为清空文件内容。
+              1为在文件中追加内容，保留原内容，在末尾追加。
+              2为读取内容。"""
+
+        if self.operationcode == 0:
+            root_path = self.root_path
+            # operate_path = "\\OperationalData\\Serialnumber.csv"
+            FileOperations.purge_file(root_path, self.operate_path)  # 调用静态方法，并传入文件根目录
+        if self.operationcode == 1:
+            root_path = self.root_path
+            operate_path = "\\OperationalData\\Serialnumber.csv"
+            datas = self.content
+            FileOperations.write_file(root_path, self.operate_path, datas)
+        if self.operationcode == 2:
+            root_path = self.root_path
+            operate_path = "\\OperationalData\\Serialnumber.csv"
+            reaturn_data = FileOperations.write_file(root_path, self.operate_path, datas)
 
 
 class Button:
@@ -164,8 +226,58 @@ class OrderRestrictions:
     def __init__(self, serialnumber):  # 接受参数序列号
         # 从设置导入参数
         self.settings = Value_base()
+        self.root_path = self.settings.root_path
 
         # 接受初始化参数
+        self.serialnumber = serialnumber
+
+    def sequence_number_resolution(self):
+        """序列号解析函数"""
+        @staticmethod
+        def data_write(serialnumber):
+            """写入序列号"""
+            operationcode = 1
+            operate_path = "\\OperationalData\\Serialnumber.csv"
+            FileOperations(operationcode, operate_path, serialnumber)
+            
+        
+        @staticmethod  # 定义静态方法
+        def data_get():
+            # """该函数用于读取序列号（csv文件）并返回"""
+            # path = self.root_path + "\\OperationalData\\Serialnumber.csv"  # 组合形成完整的根目录
+            # with open(path, "a+", encoding="UTF-8") as f:  # 打开一个文件用于读写，并将其赋给一个对象f
+              #   pass
+              
+            """该函数用来获取数据"""
+            operationcode = 2
+            operate_path = "\\OperationalData\\Serialnumber.csv"
+            datas = FileOperations(operationcode, operate_path)
+            datas = datas.judgement()
+            return datas[-1]
+
+            
+        def makes(self):
+            """控制函数
+                负责调用所有方法。"""
+            # data_write(self.serialnumber)
+            serial = data_get()
+            seriallen = len(serial)
+            serialnumberlen = len(self.serialnumber)
+            if serialnumberlen - seriallen == 2:
+                if serial[2*seriallen-1:2*seriallen] == self.serialnumber[2 * seriallen - 1:2 * seriallen]:
+                    pass
+                else:
+                    return False
+            else:
+                return False
+            
+
+    def judgment():
+        """判断并返回结果"""
+        pass
+            
+                
+
 
 
 class Eventmakes:

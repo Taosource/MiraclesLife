@@ -8,6 +8,15 @@ from pygame.locals import *
 from setting import Value_base
 
 
+def overland():
+    """用于结束GUI部分的所有扫尾工作"""
+    settings = Value_base()
+    rootpath = settings.root_path
+    path = str(rootpath) + "\\Data_base\\Data_dump.csv"
+    with open(path, "w", encoding="UTF-8") as f:  # 打开一个文件（只写模式）
+        f.truncate()  # 截断函数用于清空转储文件的内容
+
+
 class EventMake:
     def __init__(self, screen, gui):
         self.screen = screen
@@ -18,6 +27,7 @@ class EventMake:
             if event.type == pygame.QUIT:  # 判断用户是否点击关闭按钮
                 pygame.quit()
                 run = False
+                overland()
                 sys.exit()
 
 
@@ -41,3 +51,4 @@ class Gui:
             eventmake.quits()
             screen.blit(gui, (0, 0))
             pygame.display.update()
+    
