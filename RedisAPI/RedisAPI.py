@@ -11,6 +11,10 @@ import redis
 
 # print(Datas.get('test'))
 
+NAME_COUNTER = 0
+
+
+
 
 class ApiAbstractInitialize:
     """数据库连接API，通过该api进行数据管理\n
@@ -20,12 +24,16 @@ class ApiAbstractInitialize:
     def __init__(self):
         """初始化"""
         self.datas = redis.Redis(host = '127.0.0.1', port = 6379, password = 12345, decode_responses = False, charset = 'UTF-8', encoding = 'UTF-8')
-        
+        # decode_responses只有设置为False才能保证对象能够正确存储，后两个参数为编码
+        self.datas.set('make_name', 0)
+        # 写入一个名为make_name的键值对，值为0
     
     def make_name(self):
         """生成键的储存名"""
-        return_name = int(self.datas.get('make_name')) + 1
-        self.datas.set('make_name', return_name)
+        global NAME_COUNTER
+        # return_name = int(self.datas.get('make_name'))
+        return_name = int(self.datas.get('make_name'))//100
+        self.datas.set('make_name', int(self.datas.get('make_name')) + 1)
         return return_name
 
 
