@@ -32,6 +32,8 @@ The underlying data object 翻译：基础数据对象'''
 
 ID_COUNTER = 0
 # ID计数器
+AXIS_COUNTER = 0
+# 坐标计数器
 
 
 class MakeZeorPlanet:
