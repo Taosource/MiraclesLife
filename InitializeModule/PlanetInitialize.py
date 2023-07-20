@@ -1,7 +1,15 @@
 # encode = “UTF-8”
 
 from collections import namedtuple
+import sys
+import os
+import pickle
+import time
 # 导入python第三方库
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+
 
 from RedisAPI import RedisAPI
 # 导入自定义包
@@ -47,20 +55,20 @@ def alls():
     return allss 
 
 
-datas =[]
 
 def Make():
-    global datas
-    for i in range(1):
+    write_data = RedisAPI.ApiAbstractInitialize()
+    for i in range(100):
         ss = [THE_UNDERLYING_DATA_OBJECT_PLANET(x, y) for x, y in alls()]
-        datas = datas + ss
+        datas = pickle.dumps(ss)
+        write_data.write_datas({i: datas})
+        
+    print(pickle.loads(write_data.read_datas(main_key_name = str(10), keys = str(9))[0]))
 
-    
-
-Make()
-
-print(datas[5].x)
 
 
 if __name__ == '__main__':
+    t = time.time()
     Make()
+    t1 = time.time()
+    print(t1 - t)

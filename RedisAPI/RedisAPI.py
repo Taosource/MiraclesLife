@@ -1,4 +1,4 @@
-#  encoding = 'UTF_8'
+#  encoding = 'UTF-8'
 
 import redis
 # 导入第三方库
@@ -19,7 +19,7 @@ class ApiAbstractInitialize:
 
     def __init__(self):
         """初始化"""
-        self.datas = redis.Redis(host = '127.0.0.1', port = 6379, password = 12345, decode_responses = True, charset = 'UTF-8', encoding = 'UTF-8')
+        self.datas = redis.Redis(host = '127.0.0.1', port = 6379, password = 12345, decode_responses = False, charset = 'UTF-8', encoding = 'UTF-8')
         
     
     def make_name(self):
@@ -29,10 +29,15 @@ class ApiAbstractInitialize:
         return return_name
 
 
-    def parse(self, input_datas):
+    def write_datas(self, input_datas):
         """解析数据"""
         w_datas = dict(input_datas)
         self.datas.hmset(self.make_name(), w_datas)
+
+
+    def read_datas(self, main_key_name, keys):
+        """读取数据"""
+        return self.datas.hmget(main_key_name, keys)
 
 
 
