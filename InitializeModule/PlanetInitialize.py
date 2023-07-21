@@ -47,14 +47,15 @@ class MakeZeorPlanet:
         pass
     
 
-def MakeX(maths):
-    list_x = list(range(10))
-    return list_x[maths]
+def MakeX(maths:'int') -> int:
+    """生成X坐标"""
+    # list_x = list(range(10))
+    return maths
 
 
-def MakeY(maths):
-    list_y = list(range(10))
-    return list_y[maths]
+def MakeY(maths:'int') -> int:
+    # list_y = list(range(10))
+    return maths
 
 
 def MakeID() -> str:
@@ -73,8 +74,9 @@ def MakeID() -> str:
 def alls():
     allss = []
     for i in range(10):
-        allss.append((MakeID(), MakeX(i), MakeY(i)))
-    print(allss)
+        ID = MakeID()
+        allss.append((ID, MakeX(int(ID)), MakeY(int(ID))))
+    # print(allss)
     return allss 
     
 
@@ -82,14 +84,14 @@ def alls():
 
 def Make():
     write_data = RedisAPI.ApiAbstractInitialize()
-    for i in range(1000):
+    for i in range(10000000):
 
         ss = [THE_UNDERLYING_DATA_OBJECT_PLANET(ID, x, y) for ID, x, y in alls()]
         datas = pickle.dumps(ss)
         write_data.write_datas({str(i)[-1]: datas})
         
-    print(pickle.loads(write_data.read_datas(main_key_name = str(1), keys = str(0))[0]))
-    print(pickle.loads(write_data.read_datas(main_key_name = str(1), keys = str(1))[0]))
+    # print(pickle.loads(write_data.read_datas(main_key_name = str(1), keys = str(0))[0]))
+    # print(pickle.loads(write_data.read_datas(main_key_name = str(9), keys = str(9))[0]))
 
 
 
@@ -97,4 +99,15 @@ if __name__ == '__main__':
     t = time.time()
     Make()
     t1 = time.time()
-    print(t1 - t)
+    # print(f'测试完毕，本次测试共100000000（1亿实例）\n共消耗时间为{t1 - t}s')
+    write_data = RedisAPI.ApiAbstractInitialize()
+    print(pickle.loads(write_data.read_datas(main_key_name = str(1), keys = str(0))[0]))
+    print(pickle.loads(write_data.read_datas(main_key_name = str(9), keys = str(9))[0]))
+    # mer = write_data.read_datas(main_key_name = 'used_memory_human')
+    mer = write_data.redis_info()['used_memory_human']
+    print(f'测试完毕，本次测试共100000000（1亿实例）\n共消耗时间为{t1 - t}s')
+    vers = write_data.redis_info()['redis_version']
+    oss = write_data.redis_info()['os']
+    mers = write_data.redis_info()['used_memory_peak_human']
+    # print(write_data.redis_info())
+    print(f'当前内存使用量为{mer}\n数据库版本为{vers}\n操作系统为{oss}\n内存占用峰值为{mers}')

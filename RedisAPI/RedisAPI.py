@@ -43,9 +43,16 @@ class ApiAbstractInitialize:
         self.datas.hmset(self.make_name(), w_datas)
 
 
-    def read_datas(self, main_key_name, keys):
+    def read_datas(self, main_key_name, keys = None):
         """读取数据"""
-        return self.datas.hmget(main_key_name, keys)
+        if keys is None:
+            return self.datas.get(main_key_name)
+        else:
+            return self.datas.hmget(main_key_name, keys)
+        
+    def redis_info(self):
+        """读取数据库信息"""
+        return self.datas.info()
 
 
 
