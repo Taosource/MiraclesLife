@@ -37,6 +37,8 @@ class ApiAbstractInitialize:
         return return_name
 
 
+
+
     def write_datas(self, input_datas):
         """解析数据"""
         w_datas = dict(input_datas)
@@ -46,6 +48,7 @@ class ApiAbstractInitialize:
     def read_datas(self, main_key_name, keys = None):
         """读取数据"""
         if keys is None:
+            
             return self.datas.get(main_key_name)
         else:
             return self.datas.hmget(main_key_name, keys)

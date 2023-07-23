@@ -17,18 +17,18 @@ from RedisAPI import RedisAPI
 # 导入自定义包
 
 BASE_CONSTRUCTION_PARAMETERS_PLANET = ['ID','x', 'y']
-'''基础构造参数,该参数将决定所有基本数据对象的构成\n
+"""基础构造参数,该参数将决定所有基本数据对象的构成\n
 该参数为一个列表，列表内的值将决定基本数据对象的属性\n
 参数解释：\n
 x-类型：整形，功能：确定地图的x轴\n
 x-类型：整形，功能：确定地图的y轴\n
-'''
+"""
 
 
 THE_UNDERLYING_DATA_OBJECT_PLANET = namedtuple('THE_UNDERLYING_DATA_OBJECT_PLANET', BASE_CONSTRUCTION_PARAMETERS_PLANET)
 #  x, y, types, sequences = x坐标，y坐标，类型，编号，时序编号
-'''定义基础数据对象\n
-The underlying data object 翻译：基础数据对象'''
+"""定义基础数据对象\n
+The underlying data object 翻译：基础数据对象"""
 
 
 ID_COUNTER = 0
