@@ -32,7 +32,7 @@ class ApiAbstractInitialize:
         """生成键的储存名"""
         global NAME_COUNTER
         # return_name = int(self.datas.get('make_name'))
-        return_name = int(self.datas.get('make_name'))//100
+        return_name = int(self.datas.get('make_name'))//10
         self.datas.set('make_name', int(self.datas.get('make_name')) + 1)
         return return_name
 

@@ -5,16 +5,25 @@ import sys
 import os
 import pickle
 import time
+import traceback
 # 导入python第三方库
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # '../'注：表示添加上一级目录。例：'../../'  表示添加上两级目录
 # 将项目根目录添加到python环境中,方便调用所有模块
 
-
-
-from RedisAPI import RedisAPI
-# 导入自定义包
+# print(os.path.split(traceback.extract_stack()[0].filename))
+if os.path.split(traceback.extract_stack()[0].filename)[-1] == 'GetDesignateInstance.py':
+    """首先使用traceback.extract_stack()获取到调用此模块的信息，\n
+    再通过traceback.extract_stack()[0]得到最顶层的调用者。（故该部分代码无法调试，因为\n
+    调试过程中，最顶层调用者并非真正的GetDesignateInstance.py。而是相关的调试模块)\n
+    通过traceback.extract_stack()[0].filename获取到最高被调用者的文件路径及文件名，\n
+    通过[-1]选择文件名，并且进行比较。"""
+    import RedisAPI
+    # 当比较成立时执行相关策略
+else:
+    from RedisAPI import RedisAPI
+    # 导入自定义包
 
 BASE_CONSTRUCTION_PARAMETERS_PLANET = ['ID','x', 'y']
 """基础构造参数,该参数将决定所有基本数据对象的构成\n
@@ -90,9 +99,13 @@ def Make(mate_data:'dict') -> None:
         ss = [THE_UNDERLYING_DATA_OBJECT_PLANET(ID, x, y) for ID, x, y in alls()]
         datas = pickle.dumps(ss)
         write_data.write_datas({str(i)[-1]: datas})
-        
+
+    # print(pickle.loads(write_data.read_datas(main_key_name = str(0), keys = str(0))[0]))
     # print(pickle.loads(write_data.read_datas(main_key_name = str(1), keys = str(0))[0]))
-    # print(pickle.loads(write_data.read_datas(main_key_name = str(9), keys = str(9))[0]))
+    # print(pickle.loads(write_data.read_datas(main_key_name = str(2), keys = str(0))[0]))
+        
+    # print(pickle.loads(write_data.read_datas(main_key_name = str(9), keys = str(8))[0]))
+    # print(pickle.loads(write_data.read_datas(main_key_name = str(99), keys = str(9))[0]))
 
 
 
@@ -101,8 +114,8 @@ if __name__ == '__main__':
     Make()
     t1 = time.time()
     # # print(f'测试完毕，本次测试共100000000（1亿实例）\n共消耗时间为{t1 - t}s')
-    # write_data = RedisAPI.ApiAbstractInitialize()
-    # print(pickle.loads(write_data.read_datas(main_key_name = str(1), keys = str(0))[0]))
+    write_data = RedisAPI.ApiAbstractInitialize()
+    print(pickle.loads(write_data.read_datas(main_key_name = str(9), keys = str(9))[1]))
     # print(pickle.loads(write_data.read_datas(main_key_name = str(9), keys = str(9))[0]))
     # # mer = write_data.read_datas(main_key_name = 'used_memory_human')
     # mer = write_data.redis_info()['used_memory_human']
