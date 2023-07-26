@@ -6,6 +6,7 @@ import os
 import pickle
 import time
 import traceback
+import random
 # 导入python第三方库
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -41,10 +42,15 @@ The underlying data object 翻译：基础数据对象"""
 
 
 ID_COUNTER = 0
-# ID计数器
+# 创建全局ID计数器
 AXIS_COUNTER = 0
-# 坐标计数器
-
+# 创建全局坐标计数器
+MATE_DATA = dict()
+# 创建全局元数据变量
+LIST_X = []
+# 创建全局X占位列表
+LIST_Y = []
+# 创建全局Y占位列表
 
 class MakeZeorPlanet:
     """进行所有星球基础数据对象初始化"""
@@ -59,13 +65,32 @@ class MakeZeorPlanet:
 
 def MakeX(maths:'int') -> int:
     """生成X坐标"""
-    # list_x = list(range(10))
-    return maths
+    global LIST_X
+    return_value = 0
+    if not LIST_X :
+        LIST_X = list(range(int(MATE_DATA['map_size'])))
+    else:
+        pass
+    # sign = random.choice([0,1])
+    # if sign == 0:
+    return_value = random.choice(LIST_X)
+    LIST_X.remove(return_value)
+    return return_value
 
 
 def MakeY(maths:'int') -> int:
-    # list_y = list(range(10))
-    return maths
+    """生成Y坐标"""
+    global LIST_Y
+    return_value = 0
+    if not LIST_Y:
+        LIST_Y = list(range(int(MATE_DATA['map_size'])))
+    else:
+        pass
+    return_value = random.choice(LIST_Y)
+    # print(return_value)
+    # print(LIST_Y[return_value])
+    LIST_Y.remove(return_value)
+    return return_value
 
 
 def MakeID() -> str:
@@ -87,12 +112,15 @@ def alls():
         ID = MakeID()
         allss.append((ID, MakeX(int(ID)), MakeY(int(ID))))
     # print(allss)
+    # print(MATE_DATA)
     return allss 
     
 
 
 
 def Make(mate_data:'dict') -> None:
+    global MATE_DATA
+    MATE_DATA = dict(mate_data)
     write_data = RedisAPI.ApiAbstractInitialize()
     for i in range(int(mate_data['planet_size'][0:-1])):
 
@@ -103,7 +131,7 @@ def Make(mate_data:'dict') -> None:
     # print(pickle.loads(write_data.read_datas(main_key_name = str(0), keys = str(0))[0]))
     # print(pickle.loads(write_data.read_datas(main_key_name = str(1), keys = str(0))[0]))
     # print(pickle.loads(write_data.read_datas(main_key_name = str(2), keys = str(0))[0]))
-        
+    
     # print(pickle.loads(write_data.read_datas(main_key_name = str(9), keys = str(8))[0]))
     # print(pickle.loads(write_data.read_datas(main_key_name = str(99), keys = str(9))[0]))
 

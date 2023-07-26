@@ -14,5 +14,11 @@ from InitializeModule import manage
 # 导入自定义包
 
 
-mate_data = {'run_type': 'Abstract', 'planet_size': '10000'}
+mate_data = {'run_type': 'Abstract', 'planet_size': '10000', 'map_size': '1000000'}
+""" run_type:决定了初始化模块的初始化方式\n
+    planet_size:初始化时的星球数量\n
+    map_size:地图的大小(建议大小为星球数量的100倍)\n
+    """
+
+
 manage.manages(mate_data)

@@ -32,32 +32,39 @@ class GetInstance():
     def computes(self, ID:'int'):
         """通过ID计算出该实例储存的位置"""
         ID = int(ID)
+        IDs = ID
         # main_key_name = ''
         # key_name = ''
         main_counts = 0
         counts = 0
         while ID // 100 > 0:
             main_counts += 1
-            if ID - 100 < 100:
+            IDs -= 100
+            if IDs < 100:
                 break
 
         s = main_counts * 100
+        id_key = ID - s
         while (ID - s) // 10 > 0:
             counts += 1
-            if (ID - s) < 10:
+            id_key -= 10
+            if id_key < 10:
                 break
 
         return str(main_counts), str(counts)
 
     def get_value(self, GetMateInfo:'dict'):
         info = dict(GetMateInfo)
-        print(info)
+        # print(info)
         main_key_name, key_name = GetInstance.computes(self, info['ID'])
         dd = self.redis_api.read_datas(main_key_name, key_name)
         dd = pickle.loads(dd[0])
-        print(dd)
+        # print(dd)
+        # print(dd[int(info['ID'])[-1]])
+        # print(dd[int(str(info['ID'])[-1])])
+        return dd[int(str(info['ID'])[-1])]
 
     
 
 a = GetInstance()
-a.get_value({'ID':'100'})
+print(a.get_value({'ID':'2345'}))
