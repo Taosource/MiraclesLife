@@ -22,3 +22,8 @@ mate_data = {'run_type': 'Abstract', 'planet_size': '10000', 'map_size': '100000
 
 
 manage.manages(mate_data)
+
+
+class AbstractMange():
+    """抽象模拟模块的总控制类\n
+    负责控制所有抽象模拟的行为"""
