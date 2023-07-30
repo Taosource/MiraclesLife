@@ -12,29 +12,20 @@ import abc
 # 导入python包
 
 
-class PlantSourceRunTime(abc.ABC):
-    """源运行时,为一个抽象基类，规定了所有必须的接口\n
+class SourceRunTime(abc.ABC):
+    """源运行时,为一个抽象基类，实现了所有必须的接口\n
     所需实现的接口如下：\n
     run_x接口, run_y接口,"""
     
     @abc.abstractmethod
     def run_x(self):
-        """x坐标运行的接口\n
-        该函数负责x坐标的更改，使数据模型变为动态，即实现星球的运行"""
+        """x坐标运行的接口"""
         
         pass
     
     
     @abc.abstractmethod
     def run_y(self):
-        """y坐标运行的接口\n
-        该函数负责y坐标的更改，使数据模型变为动态，即实现星球的运行"""
-        
-        pass
-    
-    
-    @abc.abstractmethod
-    def run(self):
-        """该函数将所有以run开头的函数统合在一起"""
+        """y坐标运行的接口"""
         
         pass
