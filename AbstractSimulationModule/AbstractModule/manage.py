@@ -27,3 +27,7 @@ manage.manages(mate_data)
 class AbstractMange():
     """抽象模拟模块的总控制类\n
     负责控制所有抽象模拟的行为"""
+    
+    
+    def __init__(self) -> None:
+        pass
