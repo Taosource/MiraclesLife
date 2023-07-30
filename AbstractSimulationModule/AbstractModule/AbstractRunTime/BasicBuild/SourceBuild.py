@@ -8,5 +8,24 @@
 真正执行数据操作的称为运行时。\n"""
 
 
-class SourceRunTime():
-    """源运行时"""
+import abc
+# 导入python包
+
+
+class SourceRunTime(abc.ABC):
+    """源运行时,为一个抽象基类，实现了所有必须的接口\n
+    所需实现的接口如下：\n
+    run_x接口, run_y接口,"""
+    
+    @abc.abstractmethod
+    def run_x(self):
+        """x坐标运行的接口"""
+        
+        pass
+    
+    
+    @abc.abstractmethod
+    def run_y(self):
+        """y坐标运行的接口"""
+        
+        pass
