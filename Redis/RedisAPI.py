@@ -37,8 +37,6 @@ class ApiAbstractInitialize:
         return return_name
 
 
-
-
     def write_datas(self, input_datas):
         """解析数据"""
         w_datas = dict(input_datas)
@@ -52,7 +50,17 @@ class ApiAbstractInitialize:
             return self.datas.get(main_key_name)
         else:
             return self.datas.hmget(main_key_name, keys)
-        
+
+    
+    def set_datas(self, main_key_name, value, keys = None):
+        """修改数据"""
+        if keys is None:
+            self.datas.set(main_key_name, value)
+            
+        else:
+            self.datas.hmset(main_key_name, keys, value)
+    
+            
     def redis_info(self):
         """读取数据库信息"""
         return self.datas.info()

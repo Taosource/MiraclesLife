@@ -9,7 +9,7 @@ import traceback
 import random
 # 导入python第三方库
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 # '../'注：表示添加上一级目录。例：'../../'  表示添加上两级目录
 # 将项目根目录添加到python环境中,方便调用所有模块
 
@@ -20,10 +20,10 @@ if os.path.split(traceback.extract_stack()[0].filename)[-1] == 'GetDesignateInst
     调试过程中，最顶层调用者并非真正的GetDesignateInstance.py。而是相关的调试模块)\n
     通过traceback.extract_stack()[0].filename获取到最高被调用者的文件路径及文件名，\n
     通过[-1]选择文件名，并且进行比较。"""
-    import RedisAPI
+    import Redis as Redis
     # 当比较成立时执行相关策略
 else:
-    from RedisAPI import RedisAPI
+    from Redis import RedisAPI as Redis
     # 导入自定义包
 
 BASE_CONSTRUCTION_PARAMETERS_PLANET = ['ID','x', 'y']
@@ -121,7 +121,7 @@ def alls():
 def Make(mate_data:'dict') -> None:
     global MATE_DATA
     MATE_DATA = dict(mate_data)
-    write_data = RedisAPI.ApiAbstractInitialize()
+    write_data = Redis.ApiAbstractInitialize()
     for i in range(int(mate_data['planet_size'][0:-1])):
 
         ss = [THE_UNDERLYING_DATA_OBJECT_PLANET(ID, x, y) for ID, x, y in alls()]
@@ -142,8 +142,8 @@ if __name__ == '__main__':
     Make()
     t1 = time.time()
     # # print(f'测试完毕，本次测试共100000000（1亿实例）\n共消耗时间为{t1 - t}s')
-    write_data = RedisAPI.ApiAbstractInitialize()
-    print(pickle.loads(write_data.read_datas(main_key_name = str(9), keys = str(9))[1]))
+    write_data = Redis.ApiAbstractInitialize()
+    print(pickle.loads(write_data.read_datas(main_key_name = str(9), keys = str(9))[0]))
     # print(pickle.loads(write_data.read_datas(main_key_name = str(9), keys = str(9))[0]))
     # # mer = write_data.read_datas(main_key_name = 'used_memory_human')
     # mer = write_data.redis_info()['used_memory_human']
