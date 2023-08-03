@@ -46,20 +46,3 @@ class PlantRunTime(SourceBuild.PlantSourceRunTime):
                         'y':y}
         return return_value
 
-
-# class test(SourceBuild.PlantSourceRunTime):
-#     """test"""
-    
-#     def __init__(self):
-#         self.x = 0
-#         self.y = 0
-        
-#     def run_x(self):
-#         print(self.x + 1)
-        
-#     def run_y(self):
-#         print(self.y + 1)
-        
-# a = test()
-# a.run_x()
-# a.run_y()
