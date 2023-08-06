@@ -86,5 +86,5 @@ class GetInstance:
         )
 
 
-a = GetInstance()
-print(a.get_value({'ID': '2345'}))
+# a = GetInstance()
+# print(a.get_value({'ID': '2345'}))

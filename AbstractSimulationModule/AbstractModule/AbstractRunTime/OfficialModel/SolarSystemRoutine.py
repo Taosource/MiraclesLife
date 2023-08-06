@@ -38,8 +38,6 @@ class PlantRunTime(SourceBuild.PlantSourceRunTime):
         return y + 1
 
     def run(self):
-        # self.DataMolds.x, self.DataMolds.y = PlantRunTime.run_x(self.DataMolds.x), PlantRunTime.run_y(
-        # self.DataMolds.y) print(self.DataMolds)
         x, y = PlantRunTime.run_x(self, self.DataMolds['x']), PlantRunTime.run_y(self, self.DataMolds['y'])
         return_value = {'x': x,
                         'y': y}
