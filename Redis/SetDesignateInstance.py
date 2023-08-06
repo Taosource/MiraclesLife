@@ -17,6 +17,7 @@ class SetInstance:
         # 实例化一个数据api，通过调用该实例的不同方法实现数据操作
 
     def set_value(self, SetMateInfo: 'dict'):
-        """写入值"""
+        """写入修改后的值"""
         info = dict(SetMateInfo)
         # 防止错误，再次将传入值转化为字典
+        self.redis_api.set_datas(info['main_key_name'], info['set_value'])

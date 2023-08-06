@@ -38,7 +38,8 @@ class ApiAbstractInitialize:
         return return_name
 
     def write_datas(self, input_datas):
-        """解析数据"""
+        """写入数据\n
+        初始化使用"""
         w_datas = dict(input_datas)
         self.datas.hmset(self.make_name(), w_datas)
 
@@ -50,13 +51,15 @@ class ApiAbstractInitialize:
         else:
             return self.datas.hmget(main_key_name, keys)
 
-    def set_datas(self, main_key_name, value, keys = None):
-        """修改数据"""
-        if keys is None:
-            self.datas.set(main_key_name, value)
+    def set_datas(self, main_key_name, value:'dict') -> True:
+        """修改数据\n
+        运行过程中使用
+        注意，传入值必须为字典"""
+        value = dict(value)
+        # 无论如何都将传入值转化为字典（鸭子类思想）
+        self.datas.hmset(main_key_name, value)
+        # 通过redis数据库的操作实例进行更改值
 
-        else:
-            self.datas.hmset(main_key_name, keys, value)
 
     def redis_info(self):
         """读取数据库信息"""
@@ -64,3 +67,7 @@ class ApiAbstractInitialize:
 
 # def ApiAbstractInitialize():
 #     return Datas
+
+# 测试
+# a = ApiAbstractInitialize()
+# a.set_datas(str(0), str(1), 0000)

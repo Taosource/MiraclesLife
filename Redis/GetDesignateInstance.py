@@ -57,8 +57,11 @@ class GetInstance:
 
         return str(main_counts), str(counts)
 
-    def get_value(self, GetMateInfo: 'dict'):
-        """获取值"""
+    def get_value(self, GetMateInfo: 'dict', hm = False):
+        """获取值\n
+        GetMateInfo为一个字典，该字典的'ID'应该为需要获取数据的ID\n
+        hm为bool（布尔值），是可选参数，默认值为False此时返回单个数据\n
+        若传入True则将返回该ID所在主键下的整组数据"""
         info = dict(GetMateInfo)
         # print(info)
         main_key_name, key_name = GetInstance.computes(self, info['ID'])
@@ -67,23 +70,27 @@ class GetInstance:
         # print(dd)
         # print(dd[int(info['ID'])[-1]])
         # print(dd[int(str(info['ID'])[-1])])
-        return dd[int(str(info['ID'])[-1])]
+        if hm:
+            return dd
+        if not hm:
+            return dd[int(str(info['ID'])[-1])]
+        
 
-    def set_value(self, SetMateInfo: 'dict'):
-        """修改值"""
-        info = dict(SetMateInfo)
-        main_key_name, key_name = GetInstance.computes(self, info['ID'])
-        last_value = self.redis_api.read_datas(main_key_name, key_name)
-        change_value = last_value[int(str(info['ID'])[-1])]
-        change_value.x, change_value.y = info['x'], info['y']
-        last_value[int(str(info['ID'])[-1])] = change_value
-        datas = last_value
-        value = pickle.dumps(datas)
-        self.redis_api.set_datas(
-                main_key_name = main_key_name,
-                keys = key_name,
-                value = value
-        )
+    # def set_value(self, SetMateInfo: 'dict'):
+    #     """修改值"""
+    #     info = dict(SetMateInfo)
+    #     main_key_name, key_name = GetInstance.computes(self, info['ID'])
+    #     last_value = self.redis_api.read_datas(main_key_name, key_name)
+    #     change_value = last_value[int(str(info['ID'])[-1])]
+    #     change_value.x, change_value.y = info['x'], info['y']
+    #     last_value[int(str(info['ID'])[-1])] = change_value
+    #     datas = last_value
+    #     value = pickle.dumps(datas)
+    #     self.redis_api.set_datas(
+    #             main_key_name = main_key_name,
+    #             keys = key_name,
+    #             value = value
+    #     )
 
 
 # a = GetInstance()

@@ -28,8 +28,9 @@ class PlantRunTime(SourceBuild.PlantSourceRunTime):
     在其他模型中可能会存在父类。\n
     该类将实现星球的简单运行。"""
 
-    def __init__(self, DataMolds: 'dict'):
-        self.DataMolds = dict(DataMolds)
+    def __init__(self):
+        # self.DataMolds = dict(DataMolds)
+        pass
 
     def run_x(self, x):
         return x + 1
@@ -37,8 +38,21 @@ class PlantRunTime(SourceBuild.PlantSourceRunTime):
     def run_y(self, y):
         return y + 1
 
-    def run(self):
-        x, y = PlantRunTime.run_x(self, self.DataMolds['x']), PlantRunTime.run_y(self, self.DataMolds['y'])
+    def run(self, change_value:'dict') -> dict:
+        """统合所有以run开头的函数\b
+        负责调度"""
+        change_value = dict(change_value)
+        x, y = PlantRunTime.run_x(self, change_value['x']), PlantRunTime.run_y(self, change_value['y'])
         return_value = {'x': x,
                         'y': y}
         return return_value
+
+
+class CivilizationRunTim:
+    """文明运行时\n
+    继承自文明源运行时，由于为第一个模型，所以并没有其他父类。\n
+    在其他模型中可能会存在父类。\n
+    该类将实现文明的简单运行。"""
+    
+    
+    pass
