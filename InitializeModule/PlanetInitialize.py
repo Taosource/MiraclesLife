@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
 
-from RedisAPI import RedisAPI
+from Redis import RedisAPI
 # 导入自定义包
 
 BASE_CONSTRUCTION_PARAMETERS_PLANET = ['ID','x', 'y']

@@ -95,3 +95,14 @@ class GetInstance:
 
 # a = GetInstance()
 # print(a.get_value({'ID': '2345'}))
+# alive = True
+# def eat(): pass
+# def sleep(): pass
+# def code(): pass
+# def repeat(): pass
+
+# while alive:
+#     eat()
+#     sleep()
+#     code()
+#     repeat()
